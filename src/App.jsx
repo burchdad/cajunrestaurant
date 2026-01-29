@@ -352,13 +352,17 @@ const OrderOnlinePage = () => {
     address: '',
     city: '',
     zipCode: '',
-    cardNumber: '',
+    cardNumber: '', // Note: In production, use a payment gateway like Stripe
     cardExpiry: '',
     cardCVV: '',
     specialInstructions: ''
   });
   const [orderNumber, setOrderNumber] = useState('');
   const [formErrors, setFormErrors] = useState({});
+  
+  // Constants for fees and rates
+  const DELIVERY_FEE = 5.99;
+  const TAX_RATE = 0.0825;
   
   const menuItems = [
     {
@@ -475,15 +479,15 @@ const OrderOnlinePage = () => {
   };
 
   const calculateSubtotal = () => {
-    return parseFloat(calculateTotal());
+    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   };
 
   const calculateDeliveryFee = () => {
-    return orderType === 'delivery' ? 5.99 : 0;
+    return orderType === 'delivery' ? DELIVERY_FEE : 0;
   };
 
   const calculateTax = () => {
-    return ((calculateSubtotal() + calculateDeliveryFee()) * 0.0825).toFixed(2);
+    return ((calculateSubtotal() + calculateDeliveryFee()) * TAX_RATE).toFixed(2);
   };
 
   const calculateGrandTotal = () => {
@@ -508,20 +512,54 @@ const OrderOnlinePage = () => {
   const validateCheckoutForm = () => {
     const errors = {};
     
+    // Name validation
     if (!customerInfo.name.trim()) errors.name = 'Name is required';
-    if (!customerInfo.email.trim()) errors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(customerInfo.email)) errors.email = 'Email is invalid';
-    if (!customerInfo.phone.trim()) errors.phone = 'Phone is required';
     
+    // Email validation (more robust pattern)
+    if (!customerInfo.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerInfo.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    // Phone validation (basic format check)
+    if (!customerInfo.phone.trim()) {
+      errors.phone = 'Phone is required';
+    } else if (!/^[\d\s\-()]+$/.test(customerInfo.phone)) {
+      errors.phone = 'Please enter a valid phone number';
+    }
+    
+    // Delivery address validation
     if (orderType === 'delivery') {
       if (!customerInfo.address.trim()) errors.address = 'Address is required';
       if (!customerInfo.city.trim()) errors.city = 'City is required';
-      if (!customerInfo.zipCode.trim()) errors.zipCode = 'ZIP code is required';
+      if (!customerInfo.zipCode.trim()) {
+        errors.zipCode = 'ZIP code is required';
+      } else if (!/^\d{5}(-\d{4})?$/.test(customerInfo.zipCode)) {
+        errors.zipCode = 'Please enter a valid ZIP code';
+      }
     }
     
-    if (!customerInfo.cardNumber.trim()) errors.cardNumber = 'Card number is required';
-    if (!customerInfo.cardExpiry.trim()) errors.cardExpiry = 'Expiry date is required';
-    if (!customerInfo.cardCVV.trim()) errors.cardCVV = 'CVV is required';
+    // Payment validation (basic - in production, use payment gateway)
+    // NOTE: This is a demo form. In production, never handle raw card data.
+    // Use Stripe, Square, or similar PCI-compliant payment processors.
+    if (!customerInfo.cardNumber.trim()) {
+      errors.cardNumber = 'Card number is required';
+    } else if (!/^\d{13,19}$/.test(customerInfo.cardNumber.replace(/\s/g, ''))) {
+      errors.cardNumber = 'Please enter a valid card number';
+    }
+    
+    if (!customerInfo.cardExpiry.trim()) {
+      errors.cardExpiry = 'Expiry date is required';
+    } else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(customerInfo.cardExpiry)) {
+      errors.cardExpiry = 'Please use MM/YY format';
+    }
+    
+    if (!customerInfo.cardCVV.trim()) {
+      errors.cardCVV = 'CVV is required';
+    } else if (!/^\d{3,4}$/.test(customerInfo.cardCVV)) {
+      errors.cardCVV = 'CVV must be 3 or 4 digits';
+    }
     
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -540,9 +578,14 @@ const OrderOnlinePage = () => {
       return;
     }
     
-    // Generate order number
-    const newOrderNumber = 'ORD' + Date.now().toString().slice(-8);
+    // Generate more unique order number with random component
+    const timestamp = Date.now().toString().slice(-8);
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    const newOrderNumber = `ORD${timestamp}${random}`;
     setOrderNumber(newOrderNumber);
+    
+    // In production: Send order to backend, process payment through gateway
+    // The payment info should never be stored in frontend state
     
     // Move to confirmation page
     setCheckoutStep('confirmation');
@@ -867,7 +910,12 @@ const OrderOnlinePage = () => {
               {/* Payment Information */}
               <Card>
                 <CardContent className="p-6 space-y-4">
-                  <h2 className="text-2xl font-bold text-gray-800">Payment Information</h2>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-800">Payment Information</h2>
+                    <p className="text-sm text-gray-600 mt-1 bg-yellow-50 p-2 rounded">
+                      ⚠️ Demo only: In production, use a PCI-compliant payment gateway (Stripe, Square, etc.)
+                    </p>
+                  </div>
                   
                   <div>
                     <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">
@@ -1138,15 +1186,43 @@ const ReservationsPage = () => {
     }
   };
 
-  const validateForm = () => {
+  const validateReservationForm = () => {
     const errors = {};
     
+    // Name validation
     if (!formData.name.trim()) errors.name = 'Name is required';
-    if (!formData.email.trim()) errors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) errors.email = 'Email is invalid';
-    if (!formData.phone.trim()) errors.phone = 'Phone is required';
-    if (!formData.date) errors.date = 'Date is required';
+    
+    // Email validation (more robust pattern)
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    // Phone validation
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone is required';
+    } else if (!/^[\d\s\-()]+$/.test(formData.phone)) {
+      errors.phone = 'Please enter a valid phone number';
+    }
+    
+    // Date validation (check not in past)
+    if (!formData.date) {
+      errors.date = 'Date is required';
+    } else {
+      const selectedDate = new Date(formData.date + 'T00:00:00');
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate < today) {
+        errors.date = 'Date cannot be in the past';
+      }
+    }
+    
+    // Time validation
     if (!formData.time) errors.time = 'Time is required';
+    
+    // Party size validation
+    if (!formData.partySize) errors.partySize = 'Party size is required';
     
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
@@ -1155,15 +1231,17 @@ const ReservationsPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    if (!validateForm()) {
+    if (!validateReservationForm()) {
       return;
     }
     
-    // Generate reservation number
-    const newReservationNumber = 'RES' + Date.now().toString().slice(-8);
+    // Generate more unique reservation number with random component
+    const timestamp = Date.now().toString().slice(-8);
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    const newReservationNumber = `RES${timestamp}${random}`;
     setReservationNumber(newReservationNumber);
     
-    // In a real app, this would send data to a backend
+    // In production: Send data to backend
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -1183,21 +1261,37 @@ const ReservationsPage = () => {
     setFormErrors({});
   };
 
-  // Format date for display
+  // Format date for display - using components to avoid timezone issues
   const formatDate = (dateString) => {
     if (!dateString) return '';
-    const date = new Date(dateString + 'T00:00:00');
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
     return date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   };
 
   // Format time for display
   const formatTime = (timeString) => {
     if (!timeString) return '';
-    const [hours] = timeString.split(':');
+    const [hours, minutes] = timeString.split(':');
     const hour = parseInt(hours);
-    const ampm = hour >= 12 ? 'PM' : 'AM';
-    const displayHour = hour > 12 ? hour - 12 : hour === 0 ? 12 : hour;
-    return `${displayHour}:${timeString.split(':')[1]} ${ampm}`;
+    let displayHour;
+    let ampm;
+    
+    if (hour === 0) {
+      displayHour = 12;
+      ampm = 'AM';
+    } else if (hour === 12) {
+      displayHour = 12;
+      ampm = 'PM';
+    } else if (hour > 12) {
+      displayHour = hour - 12;
+      ampm = 'PM';
+    } else {
+      displayHour = hour;
+      ampm = 'AM';
+    }
+    
+    return `${displayHour}:${minutes} ${ampm}`;
   };
 
   return (
