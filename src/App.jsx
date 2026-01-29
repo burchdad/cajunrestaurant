@@ -343,6 +343,26 @@ const AboutPage = () => {
 
 const OrderOnlinePage = () => {
   const [cart, setCart] = useState([]);
+  const [checkoutStep, setCheckoutStep] = useState('menu'); // 'menu', 'checkout', 'confirmation'
+  const [orderType, setOrderType] = useState('delivery'); // 'delivery' or 'pickup'
+  const [customerInfo, setCustomerInfo] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    city: '',
+    zipCode: '',
+    cardNumber: '', // Note: In production, use a payment gateway like Stripe
+    cardExpiry: '',
+    cardCVV: '',
+    specialInstructions: ''
+  });
+  const [orderNumber, setOrderNumber] = useState('');
+  const [formErrors, setFormErrors] = useState({});
+  
+  // Constants for fees and rates
+  const DELIVERY_FEE = 5.99;
+  const TAX_RATE = 0.0825;
   
   const menuItems = [
     {
@@ -458,6 +478,140 @@ const OrderOnlinePage = () => {
     return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
   };
 
+  const calculateSubtotal = () => {
+    return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  };
+
+  const calculateDeliveryFee = () => {
+    return orderType === 'delivery' ? DELIVERY_FEE : 0;
+  };
+
+  const calculateTax = () => {
+    return ((calculateSubtotal() + calculateDeliveryFee()) * TAX_RATE).toFixed(2);
+  };
+
+  const calculateGrandTotal = () => {
+    return (calculateSubtotal() + calculateDeliveryFee() + parseFloat(calculateTax())).toFixed(2);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setCustomerInfo(prev => ({
+      ...prev,
+      [name]: value
+    }));
+    // Clear error for this field when user starts typing
+    if (formErrors[name]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  const validateCheckoutForm = () => {
+    const errors = {};
+    
+    // Name validation
+    if (!customerInfo.name.trim()) errors.name = 'Name is required';
+    
+    // Email validation (more robust pattern)
+    if (!customerInfo.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerInfo.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    // Phone validation (basic format check)
+    if (!customerInfo.phone.trim()) {
+      errors.phone = 'Phone is required';
+    } else if (!/^[\d\s\-()]+$/.test(customerInfo.phone)) {
+      errors.phone = 'Please enter a valid phone number';
+    }
+    
+    // Delivery address validation
+    if (orderType === 'delivery') {
+      if (!customerInfo.address.trim()) errors.address = 'Address is required';
+      if (!customerInfo.city.trim()) errors.city = 'City is required';
+      if (!customerInfo.zipCode.trim()) {
+        errors.zipCode = 'ZIP code is required';
+      } else if (!/^\d{5}(-\d{4})?$/.test(customerInfo.zipCode)) {
+        errors.zipCode = 'Please enter a valid ZIP code';
+      }
+    }
+    
+    // Payment validation (basic - in production, use payment gateway)
+    // NOTE: This is a demo form. In production, never handle raw card data.
+    // Use Stripe, Square, or similar PCI-compliant payment processors.
+    if (!customerInfo.cardNumber.trim()) {
+      errors.cardNumber = 'Card number is required';
+    } else if (!/^\d{13,19}$/.test(customerInfo.cardNumber.replace(/\s/g, ''))) {
+      errors.cardNumber = 'Please enter a valid card number';
+    }
+    
+    if (!customerInfo.cardExpiry.trim()) {
+      errors.cardExpiry = 'Expiry date is required';
+    } else if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(customerInfo.cardExpiry)) {
+      errors.cardExpiry = 'Please use MM/YY format';
+    }
+    
+    if (!customerInfo.cardCVV.trim()) {
+      errors.cardCVV = 'CVV is required';
+    } else if (!/^\d{3,4}$/.test(customerInfo.cardCVV)) {
+      errors.cardCVV = 'CVV must be 3 or 4 digits';
+    }
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleCheckout = () => {
+    if (cart.length === 0) return;
+    setCheckoutStep('checkout');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePlaceOrder = (e) => {
+    e.preventDefault();
+    
+    if (!validateCheckoutForm()) {
+      return;
+    }
+    
+    // Generate more unique order number with random component
+    const timestamp = Date.now().toString().slice(-8);
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    const newOrderNumber = `ORD${timestamp}${random}`;
+    setOrderNumber(newOrderNumber);
+    
+    // In production: Send order to backend, process payment through gateway
+    // The payment info should never be stored in frontend state
+    
+    // Move to confirmation page
+    setCheckoutStep('confirmation');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleStartNewOrder = () => {
+    setCart([]);
+    setCheckoutStep('menu');
+    setCustomerInfo({
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      city: '',
+      zipCode: '',
+      cardNumber: '',
+      cardExpiry: '',
+      cardCVV: '',
+      specialInstructions: ''
+    });
+    setFormErrors({});
+    setOrderNumber('');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const groupedMenu = menuItems.reduce((acc, item) => {
     if (!acc[item.category]) {
       acc[item.category] = [];
@@ -466,6 +620,438 @@ const OrderOnlinePage = () => {
     return acc;
   }, {});
 
+  // Confirmation Page
+  if (checkoutStep === 'confirmation') {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <Card className="shadow-xl">
+          <CardContent className="p-8 text-center space-y-6">
+            <div className="text-6xl text-green-600 mb-4">✓</div>
+            <h1 className="text-4xl font-bold text-gray-800">Order Confirmed!</h1>
+            <p className="text-xl text-gray-600">
+              Thank you for your order, {customerInfo.name}!
+            </p>
+            
+            <div className="bg-red-50 rounded-lg p-6 text-left space-y-4">
+              <div className="text-center mb-4">
+                <p className="text-sm text-gray-600 mb-1">Your Order Number</p>
+                <p className="text-3xl font-bold text-red-700">{orderNumber}</p>
+              </div>
+              
+              <div className="border-t pt-4 space-y-3">
+                <h3 className="font-semibold text-lg">Order Details</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="font-medium">Order Type:</span>
+                    <span className="capitalize">{orderType}</span>
+                  </div>
+                  {orderType === 'delivery' && (
+                    <div className="flex justify-between">
+                      <span className="font-medium">Delivery Address:</span>
+                      <span className="text-right">
+                        {customerInfo.address}<br />
+                        {customerInfo.city}, {customerInfo.zipCode}
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex justify-between">
+                    <span className="font-medium">Contact:</span>
+                    <span className="text-right">
+                      {customerInfo.email}<br />
+                      {customerInfo.phone}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="border-t pt-4 space-y-2">
+                <h3 className="font-semibold text-lg mb-3">Order Items</h3>
+                {cart.map(item => (
+                  <div key={item.id} className="flex justify-between text-sm">
+                    <span>{item.quantity}x {item.name}</span>
+                    <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                  </div>
+                ))}
+                <div className="border-t pt-2 mt-2 space-y-1">
+                  <div className="flex justify-between text-sm">
+                    <span>Subtotal:</span>
+                    <span>${calculateSubtotal().toFixed(2)}</span>
+                  </div>
+                  {orderType === 'delivery' && (
+                    <div className="flex justify-between text-sm">
+                      <span>Delivery Fee:</span>
+                      <span>${calculateDeliveryFee().toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-sm">
+                    <span>Tax:</span>
+                    <span>${calculateTax()}</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-lg pt-2 border-t">
+                    <span>Total:</span>
+                    <span className="text-red-700">${calculateGrandTotal()}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-4 pt-6">
+              <p className="text-gray-700">
+                {orderType === 'delivery' 
+                  ? 'Your order will be delivered in approximately 30-45 minutes.'
+                  : 'Your order will be ready for pickup in approximately 20-30 minutes.'
+                }
+              </p>
+              <p className="text-gray-600 text-sm">
+                A confirmation email has been sent to {customerInfo.email}
+              </p>
+              <Button onClick={handleStartNewOrder} className="px-8 py-6">
+                Start New Order
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  // Checkout Page
+  if (checkoutStep === 'checkout') {
+    return (
+      <div className="max-w-7xl mx-auto p-6">
+        <div className="mb-6">
+          <button
+            onClick={() => setCheckoutStep('menu')}
+            className="text-red-700 hover:text-red-800 flex items-center gap-2"
+          >
+            ← Back to Menu
+          </button>
+        </div>
+        
+        <h1 className="text-4xl font-bold text-center mb-8 text-red-700">Checkout</h1>
+        
+        <div className="grid lg:grid-cols-3 gap-6">
+          {/* Checkout Form */}
+          <div className="lg:col-span-2">
+            <form onSubmit={handlePlaceOrder} className="space-y-6">
+              {/* Order Type Selection */}
+              <Card>
+                <CardContent className="p-6 space-y-4">
+                  <h2 className="text-2xl font-bold text-gray-800">Order Type</h2>
+                  <div className="flex gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setOrderType('delivery')}
+                      className={`flex-1 p-4 rounded-lg border-2 transition-all ${
+                        orderType === 'delivery'
+                          ? 'border-red-700 bg-red-50'
+                          : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                    >
+                      <div className="text-2xl mb-2">🚗</div>
+                      <div className="font-semibold">Delivery</div>
+                      <div className="text-sm text-gray-600">30-45 min</div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setOrderType('pickup')}
+                      className={`flex-1 p-4 rounded-lg border-2 transition-all ${
+                        orderType === 'pickup'
+                          ? 'border-red-700 bg-red-50'
+                          : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                    >
+                      <div className="text-2xl mb-2">🏃</div>
+                      <div className="font-semibold">Pickup</div>
+                      <div className="text-sm text-gray-600">20-30 min</div>
+                    </button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contact Information */}
+              <Card>
+                <CardContent className="p-6 space-y-4">
+                  <h2 className="text-2xl font-bold text-gray-800">Contact Information</h2>
+                  
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={customerInfo.name}
+                      onChange={handleInputChange}
+                      className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                        formErrors.name ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="John Doe"
+                    />
+                    {formErrors.name && (
+                      <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={customerInfo.email}
+                      onChange={handleInputChange}
+                      className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                        formErrors.email ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="john@example.com"
+                    />
+                    {formErrors.email && (
+                      <p className="text-red-600 text-sm mt-1">{formErrors.email}</p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={customerInfo.phone}
+                      onChange={handleInputChange}
+                      className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                        formErrors.phone ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="(555) 123-4567"
+                    />
+                    {formErrors.phone && (
+                      <p className="text-red-600 text-sm mt-1">{formErrors.phone}</p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Delivery Address (only show if delivery selected) */}
+              {orderType === 'delivery' && (
+                <Card>
+                  <CardContent className="p-6 space-y-4">
+                    <h2 className="text-2xl font-bold text-gray-800">Delivery Address</h2>
+                    
+                    <div>
+                      <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                        Street Address *
+                      </label>
+                      <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        value={customerInfo.address}
+                        onChange={handleInputChange}
+                        className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                          formErrors.address ? 'border-red-500' : 'border-gray-300'
+                        }`}
+                        placeholder="123 Main Street"
+                      />
+                      {formErrors.address && (
+                        <p className="text-red-600 text-sm mt-1">{formErrors.address}</p>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                          City *
+                        </label>
+                        <input
+                          type="text"
+                          id="city"
+                          name="city"
+                          value={customerInfo.city}
+                          onChange={handleInputChange}
+                          className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                            formErrors.city ? 'border-red-500' : 'border-gray-300'
+                          }`}
+                          placeholder="New Orleans"
+                        />
+                        {formErrors.city && (
+                          <p className="text-red-600 text-sm mt-1">{formErrors.city}</p>
+                        )}
+                      </div>
+
+                      <div>
+                        <label htmlFor="zipCode" className="block text-sm font-medium text-gray-700 mb-1">
+                          ZIP Code *
+                        </label>
+                        <input
+                          type="text"
+                          id="zipCode"
+                          name="zipCode"
+                          value={customerInfo.zipCode}
+                          onChange={handleInputChange}
+                          className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                            formErrors.zipCode ? 'border-red-500' : 'border-gray-300'
+                          }`}
+                          placeholder="70130"
+                        />
+                        {formErrors.zipCode && (
+                          <p className="text-red-600 text-sm mt-1">{formErrors.zipCode}</p>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Payment Information */}
+              <Card>
+                <CardContent className="p-6 space-y-4">
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-800">Payment Information</h2>
+                    <p className="text-sm text-gray-600 mt-1 bg-yellow-50 p-2 rounded">
+                      ⚠️ Demo only: In production, use a PCI-compliant payment gateway (Stripe, Square, etc.)
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="cardNumber" className="block text-sm font-medium text-gray-700 mb-1">
+                      Card Number *
+                    </label>
+                    <input
+                      type="text"
+                      id="cardNumber"
+                      name="cardNumber"
+                      value={customerInfo.cardNumber}
+                      onChange={handleInputChange}
+                      className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                        formErrors.cardNumber ? 'border-red-500' : 'border-gray-300'
+                      }`}
+                      placeholder="1234 5678 9012 3456"
+                      maxLength="19"
+                    />
+                    {formErrors.cardNumber && (
+                      <p className="text-red-600 text-sm mt-1">{formErrors.cardNumber}</p>
+                    )}
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label htmlFor="cardExpiry" className="block text-sm font-medium text-gray-700 mb-1">
+                        Expiry Date *
+                      </label>
+                      <input
+                        type="text"
+                        id="cardExpiry"
+                        name="cardExpiry"
+                        value={customerInfo.cardExpiry}
+                        onChange={handleInputChange}
+                        className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                          formErrors.cardExpiry ? 'border-red-500' : 'border-gray-300'
+                        }`}
+                        placeholder="MM/YY"
+                        maxLength="5"
+                      />
+                      {formErrors.cardExpiry && (
+                        <p className="text-red-600 text-sm mt-1">{formErrors.cardExpiry}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label htmlFor="cardCVV" className="block text-sm font-medium text-gray-700 mb-1">
+                        CVV *
+                      </label>
+                      <input
+                        type="text"
+                        id="cardCVV"
+                        name="cardCVV"
+                        value={customerInfo.cardCVV}
+                        onChange={handleInputChange}
+                        className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                          formErrors.cardCVV ? 'border-red-500' : 'border-gray-300'
+                        }`}
+                        placeholder="123"
+                        maxLength="4"
+                      />
+                      {formErrors.cardCVV && (
+                        <p className="text-red-600 text-sm mt-1">{formErrors.cardCVV}</p>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Special Instructions */}
+              <Card>
+                <CardContent className="p-6 space-y-4">
+                  <h2 className="text-2xl font-bold text-gray-800">Special Instructions</h2>
+                  <textarea
+                    name="specialInstructions"
+                    value={customerInfo.specialInstructions}
+                    onChange={handleInputChange}
+                    rows="3"
+                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                    placeholder="Any special requests or dietary requirements..."
+                  />
+                </CardContent>
+              </Card>
+
+              <Button type="submit" className="w-full py-6 text-lg">
+                Place Order - ${calculateGrandTotal()}
+              </Button>
+            </form>
+          </div>
+
+          {/* Order Summary */}
+          <div className="lg:col-span-1">
+            <Card className="sticky top-6">
+              <CardContent className="p-6 space-y-4">
+                <h2 className="text-2xl font-bold text-gray-800">Order Summary</h2>
+                
+                <div className="space-y-3 max-h-64 overflow-y-auto">
+                  {cart.map(item => (
+                    <div key={item.id} className="flex justify-between text-sm border-b pb-2">
+                      <div className="flex-1">
+                        <p className="font-semibold">{item.name}</p>
+                        <p className="text-gray-600">Qty: {item.quantity}</p>
+                      </div>
+                      <span className="font-semibold">${(item.price * item.quantity).toFixed(2)}</span>
+                    </div>
+                  ))}
+                </div>
+                
+                <div className="pt-4 border-t space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span>Subtotal:</span>
+                    <span>${calculateSubtotal().toFixed(2)}</span>
+                  </div>
+                  {orderType === 'delivery' && (
+                    <div className="flex justify-between text-sm">
+                      <span>Delivery Fee:</span>
+                      <span>${calculateDeliveryFee().toFixed(2)}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between text-sm">
+                    <span>Tax (8.25%):</span>
+                    <span>${calculateTax()}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xl font-bold pt-2 border-t">
+                    <span>Total:</span>
+                    <span className="text-red-700">${calculateGrandTotal()}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Menu Page (default)
   return (
     <div className="max-w-7xl mx-auto p-6">
       <h1 className="text-4xl font-bold text-center mb-8 text-red-700">Order Online</h1>
@@ -557,7 +1143,7 @@ const OrderOnlinePage = () => {
                       <span>Total:</span>
                       <span className="text-red-700">${calculateTotal()}</span>
                     </div>
-                    <Button className="w-full py-6 text-lg">
+                    <Button onClick={handleCheckout} className="w-full py-6 text-lg">
                       Proceed to Checkout
                     </Button>
                   </div>
@@ -582,6 +1168,8 @@ const ReservationsPage = () => {
     specialRequests: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [reservationNumber, setReservationNumber] = useState('');
+  const [formErrors, setFormErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -589,24 +1177,121 @@ const ReservationsPage = () => {
       ...prev,
       [name]: value
     }));
+    // Clear error for this field when user starts typing
+    if (formErrors[name]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
+
+  const validateReservationForm = () => {
+    const errors = {};
+    
+    // Name validation
+    if (!formData.name.trim()) errors.name = 'Name is required';
+    
+    // Email validation (more robust pattern)
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address';
+    }
+    
+    // Phone validation
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone is required';
+    } else if (!/^[\d\s\-()]+$/.test(formData.phone)) {
+      errors.phone = 'Please enter a valid phone number';
+    }
+    
+    // Date validation (check not in past)
+    if (!formData.date) {
+      errors.date = 'Date is required';
+    } else {
+      const selectedDate = new Date(formData.date + 'T00:00:00');
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (selectedDate < today) {
+        errors.date = 'Date cannot be in the past';
+      }
+    }
+    
+    // Time validation
+    if (!formData.time) errors.time = 'Time is required';
+    
+    // Party size validation
+    if (!formData.partySize) errors.partySize = 'Party size is required';
+    
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // In a real app, this would send data to a backend
+    
+    if (!validateReservationForm()) {
+      return;
+    }
+    
+    // Generate more unique reservation number with random component
+    const timestamp = Date.now().toString().slice(-8);
+    const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
+    const newReservationNumber = `RES${timestamp}${random}`;
+    setReservationNumber(newReservationNumber);
+    
+    // In production: Send data to backend
     setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        date: '',
-        time: '',
-        partySize: '2',
-        specialRequests: ''
-      });
-    }, 3000);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNewReservation = () => {
+    setSubmitted(false);
+    setReservationNumber('');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      date: '',
+      time: '',
+      partySize: '2',
+      specialRequests: ''
+    });
+    setFormErrors({});
+  };
+
+  // Format date for display - using components to avoid timezone issues
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+    return date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  };
+
+  // Format time for display
+  const formatTime = (timeString) => {
+    if (!timeString) return '';
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours);
+    let displayHour;
+    let ampm;
+    
+    if (hour === 0) {
+      displayHour = 12;
+      ampm = 'AM';
+    } else if (hour === 12) {
+      displayHour = 12;
+      ampm = 'PM';
+    } else if (hour > 12) {
+      displayHour = hour - 12;
+      ampm = 'PM';
+    } else {
+      displayHour = hour;
+      ampm = 'AM';
+    }
+    
+    return `${displayHour}:${minutes} ${ampm}`;
   };
 
   return (
@@ -623,12 +1308,64 @@ const ReservationsPage = () => {
         <Card className="shadow-lg">
           <CardContent className="p-6">
             {submitted ? (
-              <div className="text-center py-12 space-y-4">
-                <div className="text-6xl">✓</div>
-                <h3 className="text-2xl font-bold text-green-600">Reservation Submitted!</h3>
-                <p className="text-gray-600">
-                  We'll send you a confirmation email shortly.
-                </p>
+              <div className="py-12 space-y-6">
+                <div className="text-center space-y-4">
+                  <div className="text-6xl text-green-600">✓</div>
+                  <h3 className="text-2xl font-bold text-green-600">Reservation Confirmed!</h3>
+                  <p className="text-gray-600">
+                    Thank you, {formData.name}! Your table is reserved.
+                  </p>
+                </div>
+                
+                <div className="bg-red-50 rounded-lg p-6 space-y-4">
+                  <div className="text-center pb-4 border-b">
+                    <p className="text-sm text-gray-600 mb-1">Confirmation Number</p>
+                    <p className="text-3xl font-bold text-red-700">{reservationNumber}</p>
+                  </div>
+                  
+                  <div className="space-y-3 text-left">
+                    <h4 className="font-semibold text-lg">Reservation Details</h4>
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="font-medium">Date:</span>
+                        <span>{formatDate(formData.date)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-medium">Time:</span>
+                        <span>{formatTime(formData.time)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-medium">Party Size:</span>
+                        <span>{formData.partySize} {formData.partySize === '1' ? 'Guest' : 'Guests'}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="font-medium">Contact:</span>
+                        <span className="text-right">
+                          {formData.email}<br />
+                          {formData.phone}
+                        </span>
+                      </div>
+                      {formData.specialRequests && (
+                        <div className="pt-2 border-t">
+                          <span className="font-medium block mb-1">Special Requests:</span>
+                          <span className="text-gray-700">{formData.specialRequests}</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="text-center space-y-4">
+                  <p className="text-sm text-gray-600">
+                    A confirmation email has been sent to {formData.email}
+                  </p>
+                  <p className="text-sm text-gray-700 bg-yellow-50 p-3 rounded">
+                    📝 Please arrive within 15 minutes of your reservation time
+                  </p>
+                  <Button onClick={handleNewReservation} className="px-8 py-6">
+                    Make Another Reservation
+                  </Button>
+                </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -642,10 +1379,14 @@ const ReservationsPage = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                    className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                      formErrors.name ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     placeholder="John Doe"
                   />
+                  {formErrors.name && (
+                    <p className="text-red-600 text-sm mt-1">{formErrors.name}</p>
+                  )}
                 </div>
 
                 <div>
@@ -658,10 +1399,14 @@ const ReservationsPage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                    className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                      formErrors.email ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     placeholder="john@example.com"
                   />
+                  {formErrors.email && (
+                    <p className="text-red-600 text-sm mt-1">{formErrors.email}</p>
+                  )}
                 </div>
 
                 <div>
@@ -674,10 +1419,14 @@ const ReservationsPage = () => {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    required
-                    className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                    className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                      formErrors.phone ? 'border-red-500' : 'border-gray-300'
+                    }`}
                     placeholder="(555) 123-4567"
                   />
+                  {formErrors.phone && (
+                    <p className="text-red-600 text-sm mt-1">{formErrors.phone}</p>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -691,10 +1440,14 @@ const ReservationsPage = () => {
                       name="date"
                       value={formData.date}
                       onChange={handleChange}
-                      required
                       min={new Date().toISOString().split('T')[0]}
-                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                      className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                        formErrors.date ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     />
+                    {formErrors.date && (
+                      <p className="text-red-600 text-sm mt-1">{formErrors.date}</p>
+                    )}
                   </div>
 
                   <div>
@@ -706,8 +1459,9 @@ const ReservationsPage = () => {
                       name="time"
                       value={formData.time}
                       onChange={handleChange}
-                      required
-                      className="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent"
+                      className={`w-full p-3 border rounded-md focus:ring-2 focus:ring-red-700 focus:border-transparent ${
+                        formErrors.time ? 'border-red-500' : 'border-gray-300'
+                      }`}
                     >
                       <option value="">Select time</option>
                       <option value="11:00">11:00 AM</option>
@@ -727,6 +1481,9 @@ const ReservationsPage = () => {
                       <option value="20:30">8:30 PM</option>
                       <option value="21:00">9:00 PM</option>
                     </select>
+                    {formErrors.time && (
+                      <p className="text-red-600 text-sm mt-1">{formErrors.time}</p>
+                    )}
                   </div>
                 </div>
 
