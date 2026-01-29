@@ -32,7 +32,9 @@ const Hero = () => (
     <div className="text-center">
       <h1 className="text-5xl font-bold mb-4">Authentic Cajun Cuisine</h1>
       <p className="text-xl mb-6">Bold Flavors from the Heart of Louisiana</p>
-      <Button className="text-lg px-8 py-6">View Menu</Button>
+      <Link to="/menu">
+        <Button className="text-lg px-8 py-6">View Menu</Button>
+      </Link>
     </div>
   </div>
 );
@@ -86,37 +88,57 @@ const MenuPage = () => {
   );
 };
 
-const FakeLogin = () => (
-  <div className="p-6 max-w-md mx-auto">
-    <h2 className="text-2xl font-bold mb-4">Login</h2>
-    <form className="flex flex-col space-y-4">
-      <input type="text" placeholder="Username" className="p-2 border rounded" />
-      <input type="password" placeholder="Password" className="p-2 border rounded" />
-      <Button type="submit">Sign In</Button>
-    </form>
-  </div>
-);
+const FakeLogin = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Form submission logic would go here
+  };
 
-const ContactPage = () => (
-  <div className="p-6 space-y-6">
-    <h2 className="text-3xl font-bold">Contact Us</h2>
-    <form className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl">
-      <input type="text" placeholder="Name" className="p-2 border rounded col-span-1" />
-      <input type="email" placeholder="Email" className="p-2 border rounded col-span-1" />
-      <textarea placeholder="Message" rows="4" className="p-2 border rounded col-span-full"></textarea>
-      <Button className="col-span-full w-max">Send Message</Button>
-    </form>
-    <div className="mt-6">
-      <h3 className="text-2xl font-semibold mb-2">Find Us</h3>
-      <iframe
-        className="w-full h-64 border rounded"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093745!2d144.9537353153174!3d-37.816279279751834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577e5d3c49f3c0!2sVictoria!5e0!3m2!1sen!2sau!4v1600000000000!5m2!1sen!2sau"
-        allowFullScreen=""
-        loading="lazy"
-      ></iframe>
+  return (
+    <div className="p-6 max-w-md mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <form className="flex flex-col space-y-4" onSubmit={handleSubmit}>
+        <label htmlFor="username" className="sr-only">Username</label>
+        <input id="username" type="text" placeholder="Username" className="p-2 border rounded" />
+        <label htmlFor="password" className="sr-only">Password</label>
+        <input id="password" type="password" placeholder="Password" className="p-2 border rounded" />
+        <Button type="submit">Sign In</Button>
+      </form>
     </div>
-  </div>
-);
+  );
+};
+
+const ContactPage = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Form submission logic would go here
+  };
+
+  return (
+    <div className="p-6 space-y-6">
+      <h2 className="text-3xl font-bold">Contact Us</h2>
+      <form className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl" onSubmit={handleSubmit}>
+        <label htmlFor="contact-name" className="sr-only">Name</label>
+        <input id="contact-name" type="text" placeholder="Name" className="p-2 border rounded col-span-1" />
+        <label htmlFor="contact-email" className="sr-only">Email</label>
+        <input id="contact-email" type="email" placeholder="Email" className="p-2 border rounded col-span-1" />
+        <label htmlFor="contact-message" className="sr-only">Message</label>
+        <textarea id="contact-message" placeholder="Message" rows="4" className="p-2 border rounded col-span-full"></textarea>
+        <Button type="submit" className="col-span-full w-max">Send Message</Button>
+      </form>
+      <div className="mt-6">
+        <h3 className="text-2xl font-semibold mb-2">Find Us</h3>
+        <iframe
+          className="w-full h-64 border rounded"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093745!2d144.9537353153174!3d-37.816279279751834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0xf577e5d3c49f3c0!2sVictoria!5e0!3m2!1sen!2sau!4v1600000000000!5m2!1sen!2sau"
+          allowFullScreen=""
+          loading="lazy"
+          title="Restaurant Location Map"
+        ></iframe>
+      </div>
+    </div>
+  );
+};
 
 const HomePage = () => (
   <div>
