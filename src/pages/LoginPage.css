@@ -1,0 +1,293 @@
+/* LoginPage Specific Styles */
+.login-page {
+  background: linear-gradient(135deg, #FEFEFE 0%, #F8FAFC 100%);
+  min-height: 100vh;
+}
+
+.login-container {
+  max-width: 28rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.login-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border: 1px solid #E5E7EB;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #DC2626, #EF4444, #F97316);
+}
+
+.login-card:hover {
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px);
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.login-title {
+  color: #1F2937;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 3px rgba(31, 41, 55, 0.1);
+}
+
+.login-subtitle {
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-label {
+  color: #374151;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+}
+
+.login-input {
+  padding: 0.75rem;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  background: #FAFAFA;
+}
+
+.login-input:focus {
+  outline: none;
+  border-color: #DC2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  background: white;
+  transform: translateY(-1px);
+}
+
+.login-input:hover {
+  border-color: #D1D5DB;
+  background: white;
+}
+
+.password-hint {
+  color: #9CA3AF;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.login-submit-btn {
+  background: linear-gradient(135deg, #DC2626, #EF4444);
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.125rem;
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+  margin-top: 0.5rem;
+}
+
+.login-submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(220, 38, 38, 0.5);
+  background: linear-gradient(135deg, #B91C1C, #DC2626);
+}
+
+.login-submit-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.forgot-password-link {
+  color: #DC2626;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.forgot-password-link:hover {
+  text-decoration: underline;
+  color: #B91C1C;
+}
+
+.auth-toggle {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E5E7EB;
+}
+
+.auth-toggle-text {
+  color: #6B7280;
+  font-size: 0.875rem;
+  margin-right: 0.25rem;
+}
+
+.auth-toggle-btn {
+  background: none;
+  border: none;
+  color: #DC2626;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+}
+
+.auth-toggle-btn:hover {
+  text-decoration: underline;
+  color: #B91C1C;
+}
+
+.benefits-card {
+  background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid #E5E7EB;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+}
+
+.benefits-card:hover {
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.benefits-title {
+  color: #1F2937;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.benefits-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #DC2626, #EF4444);
+  border-radius: 1px;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.benefits-item {
+  display: flex;
+  align-items: center;
+  color: #374151;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.benefits-item:hover {
+  color: #1F2937;
+  transform: translateX(3px);
+}
+
+.benefits-checkmark {
+  color: #DC2626;
+  margin-right: 0.75rem;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.mode-transition {
+  animation: modeSlide 0.4s ease-in-out;
+}
+
+@keyframes modeSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.input-focus-ring {
+  position: relative;
+}
+
+.input-focus-ring::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 8px;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.login-input:focus + .input-focus-ring::after {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+@media (max-width: 640px) {
+  .form-group-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .login-container {
+    padding: 1rem;
+  }
+  
+  .login-card {
+    border-radius: 15px;
+  }
+  
+  .benefits-card {
+    margin-top: 1rem;
+  }
+}
