@@ -1,8 +1,8 @@
-# Cajun Restaurant Website
+# Blue Anchor Seafood Restaurant Website
 
-A modern, responsive restaurant website built with React, showcasing authentic Cajun cuisine from Louisiana.
+A modern, responsive restaurant website built with React, showcasing fresh ocean-to-table seafood dining.
 
-## 🌶️ Features
+## 🌊 Features
 
 - **Homepage** - Hero section with stunning food imagery and feature highlights
 - **Menu Page** - Complete menu with Appetizers, Mains, and Sides sections
@@ -31,8 +31,8 @@ A modern, responsive restaurant website built with React, showcasing authentic C
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/burchdad/cajunrestaurant.git
-cd cajunrestaurant
+git clone https://github.com/burchdad/blueanchorseafood.git
+cd blueanchorseafood
 ```
 
 2. Install dependencies:
@@ -70,9 +70,9 @@ const menu = {
 
 ### Changing Colors
 
-The site uses a Cajun-themed red color scheme. To customize:
-- Primary red: `bg-red-700` (navbar, buttons)
-- Hover state: `hover:bg-red-800`
+The site uses a coastal blue color scheme. To customize:
+- Primary blue: `bg-blue-600` (navbar, buttons)
+- Hover state: `hover:bg-blue-700`
 
 Update these classes in `src/App.jsx` or modify `tailwind.config.js`.
 
@@ -87,7 +87,7 @@ See the Pull Request for screenshots of all pages.
 ## 🏗️ Project Structure
 
 ```
-cajunrestaurant/
+blueanchorseafood/
 ├── public/          # Static assets
 ├── src/
 │   ├── components/

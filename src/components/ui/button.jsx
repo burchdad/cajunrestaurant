@@ -5,11 +5,11 @@ const Button = React.forwardRef(({ className, variant = "default", size = "defau
   const baseStyles = "inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 transform hover:scale-105 active:scale-95";
   
   const variants = {
-    default: "btn-gradient text-white shadow-lg hover:shadow-xl",
-    secondary: "bg-gradient-dark text-white hover:shadow-xl",
-    outline: "border-2 border-red-700 text-red-700 hover:bg-red-700 hover:text-white bg-white/90 backdrop-blur-sm",
-    gold: "bg-gradient-gold text-gray-900 hover:shadow-xl",
-    glass: "glass-effect text-white hover:bg-white/20"
+    default: "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white shadow-lg hover:shadow-xl",
+    secondary: "bg-gradient-to-r from-gray-800 to-gray-900 text-white hover:shadow-xl",
+    outline: "border-2 border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white bg-white/90 backdrop-blur-sm",
+    gold: "bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white hover:shadow-xl",
+    glass: "bg-white/10 backdrop-blur-md text-white hover:bg-white/20 border border-white/20"
   };
   
   const sizes = {

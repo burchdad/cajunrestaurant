@@ -13,9 +13,7 @@ const Navbar = () => {
         <div className="glass">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
-              <Link to="/" className="text-3xl font-bold hover:text-yellow-200 transition-all duration-300 transform hover:scale-105 font-['Playfair_Display'] drop-shadow-lg text-white">
-                🌶️ <span className="text-gradient-gold">Cajun Cuisine</span>
-              </Link>
+              
               
               {/* Mobile Menu Button */}
               <button 
@@ -30,40 +28,11 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-
-        {/* Centered Arch Navigation */}
-        <div className="hidden md:block absolute top-24 left-1/2 transform -translate-x-1/2 w-full max-w-5xl px-4">
-          <div className="relative h-40 flex items-center justify-center">
-            {[
-              { label: "HOME", to: "/", position: "left-0 top-12" },
-              { label: "MENU", to: "/menu", position: "left-1/4 top-4" },
-              { label: "ABOUT", to: "/about", position: "left-1/2 top-0 transform -translate-x-1/2" },
-              { label: "RESERVE", to: "/reservations", position: "right-1/4 top-4" },
-              { label: "CONTACT", to: "/contact", position: "right-0 top-12" },
-            ].map(({ label, to, position }) => (
-              <Link
-                key={to}
-                to={to}
-                className={`absolute ${position} px-4 py-2 md:px-6 md:py-3 rounded-full bg-black/60 backdrop-blur-md border-2 border-white/30 text-white font-black text-sm md:text-lg uppercase tracking-widest hover:bg-yellow-600/80 hover:text-white hover:border-yellow-300 hover:scale-110 transition-all duration-300 shadow-2xl hover:shadow-yellow-500/50 whitespace-nowrap z-10`}
-              >
-                {label}
-              </Link>
-            ))}
-            
-            {/* Order Now Button - Center Bottom */}
-            <Link 
-              to="/order" 
-              className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-red-600 text-white font-black px-6 py-3 md:px-8 md:py-4 rounded-full hover:bg-red-700 transition-all duration-300 hover:scale-110 shadow-2xl border-3 border-red-500 hover:border-red-400 uppercase tracking-widest text-lg md:text-xl hover:shadow-red-500/50 z-10"
-            >
-              ORDER NOW
-            </Link>
-          </div>
-        </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
       <div className={`sm:hidden fixed inset-x-0 top-20 z-40 transition-all duration-500 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
-        <div className="bg-gradient-to-b from-red-900 via-red-800 to-red-900 backdrop-blur-xl border-b border-red-600/50 shadow-2xl">
+        <div className="bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 backdrop-blur-xl border-b border-blue-600/50 shadow-2xl">
           <div className="container mx-auto px-6 py-8">
             {/* Mobile Navigation Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
@@ -74,7 +43,7 @@ const Navbar = () => {
               >
                 <div className="text-center">
                   <div className="text-3xl mb-2 group-hover:animate-bounce">🏠</div>
-                  <div className="text-lg font-semibold text-white group-hover:text-yellow-200">Home</div>
+                  <div className="text-lg font-semibold text-white group-hover:text-gray-200">Home</div>
                   <div className="text-sm text-gray-300 mt-1">Welcome Page</div>
                 </div>
               </Link>
@@ -86,7 +55,7 @@ const Navbar = () => {
               >
                 <div className="text-center">
                   <div className="text-3xl mb-2 group-hover:animate-bounce">🍽️</div>
-                  <div className="text-lg font-semibold text-white group-hover:text-yellow-200">Menu</div>
+                  <div className="text-lg font-semibold text-white group-hover:text-gray-200">Menu</div>
                   <div className="text-sm text-gray-300 mt-1">Our Dishes</div>
                 </div>
               </Link>
@@ -98,7 +67,7 @@ const Navbar = () => {
               >
                 <div className="text-center">
                   <div className="text-3xl mb-2 group-hover:animate-bounce">🛒</div>
-                  <div className="text-lg font-semibold text-white group-hover:text-yellow-200">Order</div>
+                  <div className="text-lg font-semibold text-white group-hover:text-gray-200">Order</div>
                   <div className="text-sm text-gray-300 mt-1">Order Online</div>
                 </div>
               </Link>
@@ -110,7 +79,7 @@ const Navbar = () => {
               >
                 <div className="text-center">
                   <div className="text-3xl mb-2 group-hover:animate-bounce">📅</div>
-                  <div className="text-lg font-semibold text-white group-hover:text-yellow-200">Reserve</div>
+                  <div className="text-lg font-semibold text-white group-hover:text-gray-200">Reserve</div>
                   <div className="text-sm text-gray-300 mt-1">Book Table</div>
                 </div>
               </Link>
@@ -122,7 +91,7 @@ const Navbar = () => {
               >
                 <div className="text-center">
                   <div className="text-3xl mb-2 group-hover:animate-bounce">👥</div>
-                  <div className="text-lg font-semibold text-white group-hover:text-yellow-200">About</div>
+                  <div className="text-lg font-semibold text-white group-hover:text-cyan-200">About</div>
                   <div className="text-sm text-gray-300 mt-1">Our Story</div>
                 </div>
               </Link>
@@ -134,7 +103,7 @@ const Navbar = () => {
               >
                 <div className="text-center">
                   <div className="text-3xl mb-2 group-hover:animate-bounce">📞</div>
-                  <div className="text-lg font-semibold text-white group-hover:text-yellow-200">Contact</div>
+                  <div className="text-lg font-semibold text-white group-hover:text-cyan-200">Contact</div>
                   <div className="text-sm text-gray-300 mt-1">Get in Touch</div>
                 </div>
               </Link>
@@ -150,7 +119,7 @@ const Navbar = () => {
                 </Link>
                 <Link to="/reservations" onClick={() => setIsOpen(false)}>
                   <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg font-semibold">
-                    📞 Call (504) 555-CAJUN
+                    📞 Call (504) 555-FISH
                   </Button>
                 </Link>
               </div>
@@ -159,7 +128,7 @@ const Navbar = () => {
             {/* Contact Info */}
             <div className="border-t border-white/20 pt-6 mt-6">
               <div className="text-center text-sm text-gray-300">
-                <p className="mb-2">📍 123 Bourbon Street, New Orleans, LA</p>
+                <p className="mb-2">📍 123 Harbor Drive, Seaside, FL</p>
                 <p>🕒 Open Daily: Mon-Thu 11AM-9PM | Fri-Sat 11AM-10PM | Sun 12PM-8PM</p>
               </div>
             </div>
@@ -182,18 +151,28 @@ const Hero = () => (
   <div 
     className="relative min-h-[85vh] bg-cover bg-center flex items-center justify-center text-white overflow-hidden"
     style={{ 
-      backgroundImage: "url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600')"
+      backgroundImage: "url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600')"
     }}
   >
     <div className="absolute inset-0 hero-overlay"></div>
     <div className="absolute inset-0 pattern-dots opacity-30"></div>
     <div className="text-center z-10 animate-fadeScale">
       <h1 className="text-6xl md:text-7xl font-bold mb-6 font-['Playfair_Display'] animate-fadeUp">
-        <span className="text-gradient-gold">Authentic</span><br />
-        <span className="text-white">Cajun Cuisine</span>
+        <span className="relative inline-block font-black text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] tracking-tight">
+          Blue Anchor
+          {/* ARC BUTTONS */}
+          <div className="absolute left-1/2 bottom-full mb-16 md:mb-20 -translate-x-1/2 w-[600px] md:w-[800px] h-[120px] pointer-events-none">
+            <Link to="/" className="arc-btn arc-a bg-black/80 backdrop-blur-md text-white font-black hover:bg-gray-600 hover:text-white transition-all duration-300 shadow-xl hover:shadow-gray-500/50">HOME</Link>
+            <Link to="/menu" className="arc-btn arc-b bg-black/80 backdrop-blur-md text-white font-black hover:bg-gray-600 hover:text-white transition-all duration-300 shadow-xl hover:shadow-gray-500/50">MENU</Link>
+            <Link to="/order" className="arc-btn arc-c bg-blue-600 text-white font-black hover:bg-blue-700 hover:text-white transition-all duration-300 shadow-xl hover:shadow-blue-500/50">ORDER NOW</Link>
+            <Link to="/about" className="arc-btn arc-d bg-black/80 backdrop-blur-md text-white font-black hover:bg-gray-600 hover:text-white transition-all duration-300 shadow-xl hover:shadow-gray-500/50">ABOUT</Link>
+            <Link to="/contact" className="arc-btn arc-e bg-black/80 backdrop-blur-md text-white font-black hover:bg-gray-600 hover:text-white transition-all duration-300 shadow-xl hover:shadow-gray-500/50">CONTACT</Link>
+          </div>
+        </span><br />
+        <span className="text-white">Seafood</span>
       </h1>
-      <p className="text-2xl md:text-3xl mb-8 text-yellow-100 font-light animate-fadeUp tracking-wide">
-        Bold Flavors from the Heart of Louisiana
+      <p className="text-2xl md:text-3xl mb-8 text-white font-light animate-fadeUp tracking-wide">
+        Fresh Ocean to Table Excellence
       </p>
       <div className="animate-float">
         <Link to="/menu">
@@ -204,23 +183,23 @@ const Hero = () => (
       </div>
     </div>
     {/* Decorative elements */}
-    <div className="absolute top-10 left-10 text-6xl animate-float opacity-20">🌶️</div>
+    <div className="absolute top-10 left-10 text-6xl animate-float opacity-20">🦈</div>
     <div className="absolute bottom-10 right-10 text-4xl animate-float opacity-20" style={{animationDelay: '1s'}}>🦞</div>
-    <div className="absolute top-1/2 left-5 text-5xl animate-float opacity-20" style={{animationDelay: '2s'}}>🎷</div>
+    <div className="absolute top-1/2 left-5 text-5xl animate-float opacity-20" style={{animationDelay: '2s'}}>⚓</div>
   </div>
 );
 
 const HomePage = () => {
   const carouselImages = [
     {
-      url: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600",
-      title: "Authentic Cajun Cuisine",
-      description: "Bold Flavors from the Heart of Louisiana"
+      url: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1600",
+      title: "Fresh Ocean Seafood",
+      description: "Sourced Daily from Local Waters"
     },
     {
-      url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600",
-      title: "Fresh Ingredients",
-      description: "Made with Love Daily"
+      url: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=1600",
+      title: "Expert Preparation",
+      description: "Crafted by Experienced Chefs"
     },
     {
       url: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600",
@@ -231,19 +210,19 @@ const HomePage = () => {
 
   const features = [
     { 
-      title: "Bold Flavors", 
-      icon: "🌶️", 
-      description: "Authentic spices and seasonings that transport you to Louisiana" 
+      title: "Ocean Fresh", 
+      icon: "🌊", 
+      description: "Daily catches from local fishing fleets and sustainable sources" 
     },
     { 
-      title: "Southern Comfort", 
-      icon: "🏡", 
-      description: "Warm hospitality and recipes passed down through generations" 
+      title: "Coastal Comfort", 
+      icon: "🏖️", 
+      description: "Warm hospitality with recipes from seaside traditions" 
     },
     { 
-      title: "Family Vibes", 
-      icon: "❤️", 
-      description: "A welcoming atmosphere where everyone feels at home" 
+      title: "Family Anchored", 
+      icon: "⚓", 
+      description: "A welcoming harbor where everyone feels at home" 
     }
   ];
 
@@ -255,8 +234,8 @@ const HomePage = () => {
       <section className="bg-gradient-to-r from-red-50 via-white to-yellow-50 py-16">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12 animate-fadeIn">
-            <h2 className="text-5xl font-bold text-gray-800 mb-4 font-['Playfair_Display']">Experience Our Kitchen</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">From our kitchen to your table, every dish tells a story of tradition and passion</p>
+            <h2 className="text-5xl font-bold text-gray-800 mb-4 font-['Playfair_Display']">Experience Our Catch</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">From our galley to your table, every dish celebrates the bounty of the sea</p>
           </div>
           <div className="animate-fadeInScale">
             <Carousel images={carouselImages} autoPlay={true} interval={4000} />
@@ -265,12 +244,12 @@ const HomePage = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-red-900 to-gray-900 relative">
+      <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 relative">
         <div className="absolute inset-0 pattern-lines opacity-10"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center mb-16 animate-fadeIn">
-            <h2 className="text-5xl font-bold text-white mb-4 font-['Playfair_Display']">What Makes Us Special</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">Three pillars that define our commitment to authentic Cajun cuisine</p>
+            <h2 className="text-5xl font-bold text-white mb-4 font-['Playfair_Display']">What Sets Our Anchor</h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">Three pillars that define our commitment to exceptional seafood dining</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, i) => (
@@ -291,8 +270,8 @@ const HomePage = () => {
       {/* Call to Action Section */}
       <section className="py-20 bg-gradient-to-r from-yellow-50 to-red-50">
         <div className="container mx-auto px-6 text-center animate-fadeInScale">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6 font-['Playfair_Display']">Ready for an Authentic Experience?</h2>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">Join us for a culinary journey through Louisiana's finest flavors</p>
+          <h2 className="text-4xl font-bold text-gray-800 mb-6 font-['Playfair_Display']">Ready for a Fresh Experience?</h2>
+          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">Join us for a culinary voyage through the ocean's finest treasures</p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link to="/order">
               <Button size="xl" className="text-lg px-10">
@@ -313,27 +292,27 @@ const HomePage = () => {
 
 const MenuPage = () => {
   const menu = {
-    "🥗 Appetizers": [
-      { name: "Cajun Fried Pickles", price: "$8.99", description: "Crispy dill pickles with tangy remoulade" },
-      { name: "Boudin Balls", price: "$9.99", description: "Traditional rice & pork sausage, deep fried" },
-      { name: "Crawfish Dip", price: "$11.99", description: "Creamy crawfish dip with crispy pita chips" },
-      { name: "Fried Okra", price: "$7.99", description: "Golden fried okra with Cajun seasoning" }
+    "� Appetizers": [
+      { name: "Coconut Shrimp", price: "$12.99", description: "Jumbo shrimp in crispy coconut coating with mango dipping sauce" },
+      { name: "Crab Cakes", price: "$14.99", description: "Maryland-style crab cakes with chipotle aioli" },
+      { name: "Calamari Rings", price: "$10.99", description: "Golden fried squid with marinara and lemon" },
+      { name: "Oysters Rockefeller", price: "$13.99", description: "Fresh oysters with spinach, herbs, and parmesan" }
     ],
     "🍽️ Main Dishes": [
-      { name: "Jambalaya", price: "$16.99", description: "Traditional rice with chicken, sausage & Creole spices" },
-      { name: "Seafood Gumbo", price: "$18.99", description: "Rich roux-based stew with shrimp, crab & okra" },
-      { name: "Chicken & Sausage Gumbo", price: "$16.99", description: "Hearty gumbo with andouille sausage" },
-      { name: "Blackened Catfish", price: "$19.99", description: "Fresh catfish with Cajun spices & dirty rice" },
-      { name: "Shrimp Étouffée", price: "$21.99", description: "Succulent shrimp in spicy gravy over rice" },
-      { name: "Red Beans & Rice", price: "$14.99", description: "Monday special with andouille sausage" },
-      { name: "Po' Boy Sandwich", price: "$13.99", description: "Choice of fried shrimp or oysters" }
+      { name: "Grilled Salmon", price: "$22.99", description: "Atlantic salmon with lemon herb butter and seasonal vegetables" },
+      { name: "Lobster Tail Dinner", price: "$34.99", description: "Two lobster tails with drawn butter and garlic mashed potatoes" },
+      { name: "Fish & Chips", price: "$18.99", description: "Beer-battered cod with hand-cut fries and coleslaw" },
+      { name: "Seafood Paella", price: "$26.99", description: "Saffron rice with shrimp, mussels, clams, and calamari" },
+      { name: "Blackened Mahi Mahi", price: "$21.99", description: "Spice-crusted mahi mahi with coconut rice and mango salsa" },
+      { name: "New England Clam Chowder", price: "$16.99", description: "Creamy chowder served in a sourdough bread bowl" },
+      { name: "Shrimp Scampi", price: "$19.99", description: "Garlic butter shrimp over linguine pasta" }
     ],
-    "🥘 Sides": [
-      { name: "Dirty Rice", price: "$5.99", description: "Cajun rice with ground meat & vegetables" },
-      { name: "Collard Greens", price: "$5.99", description: "Slow-cooked with smoked ham hock" },
-      { name: "Cornbread", price: "$4.99", description: "Sweet & savory homemade cornbread" },
-      { name: "Mac & Cheese", price: "$6.99", description: "Creamy three-cheese blend" },
-      { name: "Roasted Red Potatoes", price: "$5.99", description: "Herb-seasoned baby potatoes" }
+    "🥗 Sides": [
+      { name: "Garlic Mashed Potatoes", price: "$6.99", description: "Creamy potatoes with roasted garlic" },
+      { name: "Grilled Asparagus", price: "$7.99", description: "Fresh asparagus with lemon and parmesan" },
+      { name: "Coconut Rice", price: "$5.99", description: "Jasmine rice cooked in coconut milk" },
+      { name: "Coleslaw", price: "$4.99", description: "Fresh cabbage slaw with tangy dressing" },
+      { name: "Sweet Potato Fries", price: "$6.99", description: "Hand-cut fries with sea salt" }
     ]
   };
 
@@ -346,7 +325,7 @@ const MenuPage = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 animate-fadeIn">
           <h1 className="text-6xl font-bold text-gray-800 mb-4 font-['Playfair_Display']">Our Menu</h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">Authentic Louisiana cuisine made with love and tradition</p>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">Fresh seafood prepared with coastal culinary traditions</p>
           <Button onClick={printMenu} variant="outline" size="lg" className="animate-pulse">
             📄 Download / Print Menu
           </Button>
@@ -356,19 +335,19 @@ const MenuPage = () => {
           {Object.entries(menu).map(([section, items], sectionIndex) => (
             <div key={section} className="mb-16">
               <Card variant="gradient" className="animate-fadeInScale" style={{animationDelay: `${sectionIndex * 0.2}s`}}>
-                <div className="bg-gradient-cajun text-white p-6 rounded-t-2xl">
+                <div className="bg-gradient-ocean text-white p-6 rounded-t-2xl">
                   <h2 className="text-4xl font-bold text-center font-['Playfair_Display']">{section}</h2>
                 </div>
                 <CardContent className="p-8">
                   <div className="grid md:grid-cols-2 gap-6">
                     {items.map((item, idx) => (
-                      <div key={idx} className="group hover:bg-red-50/50 p-4 rounded-xl transition-all duration-300 border border-transparent hover:border-red-200">
+                      <div key={idx} className="group hover:bg-blue-50/50 p-4 rounded-xl transition-all duration-300 border border-transparent hover:border-blue-200">
                         <div className="flex justify-between items-start mb-2">
-                          <h3 className="text-xl font-bold text-gray-800 group-hover:text-red-700 transition-colors font-['Playfair_Display']">
+                          <h3 className="text-xl font-bold text-gray-800 group-hover:text-blue-700 transition-colors font-['Playfair_Display']">
                             {typeof item === 'string' ? item : item.name}
                           </h3>
                           {item.price && (
-                            <span className="text-xl font-bold text-red-700 bg-yellow-100 px-3 py-1 rounded-full">
+                            <span className="text-xl font-bold text-blue-700 bg-gray-100 px-3 py-1 rounded-full">
                               {item.price}
                             </span>
                           )}
@@ -389,10 +368,10 @@ const MenuPage = () => {
         <div className="text-center mt-12 animate-fadeIn">
           <Card variant="dark" className="max-w-2xl mx-auto">
             <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-yellow-400 mb-4 font-['Playfair_Display']">🌟 Chef's Note</h3>
+              <h3 className="text-2xl font-bold text-gray-400 mb-4 font-['Playfair_Display']">🦈 Captain's Note</h3>
               <p className="text-gray-300 leading-relaxed">
-                All our dishes are prepared fresh daily using traditional Louisiana recipes. 
-                Spice levels can be adjusted upon request. Ask your server about our daily specials!
+                All our seafood is sourced fresh daily from local fishing fleets and sustainable suppliers. 
+                Preparation styles can be customized upon request. Ask your server about our daily catches!
               </p>
             </CardContent>
           </Card>
@@ -407,9 +386,9 @@ const AboutPage = () => {
     <div className="max-w-6xl mx-auto p-6 space-y-12">
       {/* Hero Section */}
       <div className="text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-red-700">About Us</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-blue-700">About Us</h1>
         <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-          Bringing the authentic taste of Louisiana to your table since 1995
+          Bringing the freshest catch from sea to table since 1995
         </p>
       </div>
 
@@ -418,15 +397,14 @@ const AboutPage = () => {
         <div className="space-y-4">
           <h2 className="text-3xl font-bold text-gray-800">Our Story</h2>
           <p className="text-gray-700 leading-relaxed">
-            Founded by Chef Marie Boudreaux in 1995, our restaurant brings the rich culinary traditions 
-            of Louisiana to life. Growing up in the bayous of Lafayette, Chef Marie learned the art of 
-            Cajun cooking from her grandmother, who taught her that food is more than sustenance—it's 
-            love, community, and heritage.
+            Founded by Captain Mike Anderson in 1995, our restaurant brings the finest ocean bounty 
+            directly to your table. Growing up in a fishing family along the coast, Captain Mike learned 
+            the art of selecting the freshest catch and preparing it with respect for the sea's gifts.
           </p>
           <p className="text-gray-700 leading-relaxed">
-            Every dish we serve honors these traditions, using time-tested recipes passed down through 
-            generations. From our perfectly seasoned gumbo to our melt-in-your-mouth étouffée, we stay 
-            true to the authentic flavors that make Cajun cuisine unforgettable.
+            Every dish we serve honors the maritime traditions passed down through generations of fishermen. 
+            From our perfectly grilled salmon to our signature seafood paella, we stay true to the flavors 
+            that celebrate the ocean's abundance.
           </p>
         </div>
         <div 
@@ -436,24 +414,24 @@ const AboutPage = () => {
       </div>
 
       {/* Values Section */}
-      <div className="bg-red-50 rounded-lg p-8">
+      <div className="bg-blue-50 rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Our Values</h2>
         <div className="grid md:grid-cols-3 gap-6">
           <Card className="hover:shadow-xl transition-shadow duration-300">
             <CardContent className="p-6 space-y-2">
-              <div className="text-4xl text-center">🌶️</div>
-              <h3 className="text-xl font-semibold text-center">Authenticity</h3>
+              <div className="text-4xl text-center">�</div>
+              <h3 className="text-xl font-semibold text-center">Freshness</h3>
               <p className="text-gray-600 text-center">
-                Traditional recipes and techniques that honor Cajun heritage
+                Daily sourced seafood from trusted local fishermen and sustainable suppliers
               </p>
             </CardContent>
           </Card>
           <Card className="hover:shadow-xl transition-shadow duration-300">
             <CardContent className="p-6 space-y-2">
-              <div className="text-4xl text-center">❤️</div>
+              <div className="text-4xl text-center">⚓</div>
               <h3 className="text-xl font-semibold text-center">Community</h3>
               <p className="text-gray-600 text-center">
-                Creating a warm, welcoming space where everyone feels at home
+                Creating a welcoming harbor where everyone feels at home
               </p>
             </CardContent>
           </Card>
@@ -479,9 +457,9 @@ const AboutPage = () => {
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=400')" }}
             />
             <CardContent className="p-6 text-center space-y-2">
-              <h3 className="text-xl font-semibold">Chef Marie Boudreaux</h3>
+              <h3 className="text-xl font-semibold">Captain Mike Anderson</h3>
               <p className="text-gray-600">Head Chef & Owner</p>
-              <p className="text-sm text-gray-500">30+ years of authentic Cajun cooking</p>
+              <p className="text-sm text-gray-500">30+ years of seafood expertise</p>
             </CardContent>
           </Card>
           <Card className="hover:shadow-xl transition-shadow duration-300">
@@ -490,9 +468,9 @@ const AboutPage = () => {
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=400')" }}
             />
             <CardContent className="p-6 text-center space-y-2">
-              <h3 className="text-xl font-semibold">Chef Antoine Thibodaux</h3>
+              <h3 className="text-xl font-semibold">Chef Elena Rodriguez</h3>
               <p className="text-gray-600">Sous Chef</p>
-              <p className="text-sm text-gray-500">Specializes in seafood and gumbo</p>
+              <p className="text-sm text-gray-500">Specializes in fresh fish and shellfish</p>
             </CardContent>
           </Card>
           <Card className="hover:shadow-xl transition-shadow duration-300">
@@ -501,7 +479,7 @@ const AboutPage = () => {
               style={{ backgroundImage: "url('https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?w=400')" }}
             />
             <CardContent className="p-6 text-center space-y-2">
-              <h3 className="text-xl font-semibold">Sarah Landry</h3>
+              <h3 className="text-xl font-semibold">Marina Bay</h3>
               <p className="text-gray-600">Restaurant Manager</p>
               <p className="text-sm text-gray-500">Ensuring every guest feels like family</p>
             </CardContent>
@@ -517,12 +495,12 @@ const OrderOnlinePage = () => {
   const [total, setTotal] = useState(0);
 
   const menuItems = [
-    { id: 1, name: "Jambalaya", price: 16.99, category: "Mains", description: "Traditional rice with chicken, sausage & Creole spices" },
-    { id: 2, name: "Seafood Gumbo", price: 18.99, category: "Mains", description: "Rich roux-based stew with shrimp, crab & okra" },
-    { id: 3, name: "Shrimp Étouffée", price: 21.99, category: "Mains", description: "Succulent shrimp in spicy gravy over rice" },
-    { id: 4, name: "Boudin Balls", price: 9.99, category: "Appetizers", description: "Traditional rice & pork sausage, deep fried" },
-    { id: 5, name: "Cajun Fried Pickles", price: 8.99, category: "Appetizers", description: "Crispy dill pickles with tangy remoulade" },
-    { id: 6, name: "Dirty Rice", price: 5.99, category: "Sides", description: "Cajun rice with ground meat & vegetables" },
+    { id: 1, name: "Grilled Salmon", price: 22.99, category: "Mains", description: "Atlantic salmon with lemon herb butter and seasonal vegetables" },
+    { id: 2, name: "Seafood Paella", price: 26.99, category: "Mains", description: "Saffron rice with shrimp, mussels, clams, and calamari" },
+    { id: 3, name: "Lobster Tail Dinner", price: 34.99, category: "Mains", description: "Two lobster tails with drawn butter and garlic mashed potatoes" },
+    { id: 4, name: "Coconut Shrimp", price: 12.99, category: "Appetizers", description: "Jumbo shrimp in crispy coconut coating with mango dipping sauce" },
+    { id: 5, name: "Crab Cakes", price: 14.99, category: "Appetizers", description: "Maryland-style crab cakes with chipotle aioli" },
+    { id: 6, name: "Coconut Rice", price: 5.99, category: "Sides", description: "Jasmine rice cooked in coconut milk" },
   ];
 
   const addToCart = (item) => {
@@ -554,7 +532,7 @@ const OrderOnlinePage = () => {
   };
 
   const handleCheckout = () => {
-    alert('Order placed! Thank you for choosing Cajun Cuisine!');
+    alert('Order placed! Thank you for choosing Blue Anchor Seafood!');
     setCart([]);
     setTotal(0);
   };
@@ -659,7 +637,7 @@ const ReservationsPage = () => {
     <div className="max-w-4xl mx-auto p-6">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Make a Reservation</h1>
-        <p className="text-xl text-gray-600">Book your table for an authentic Cajun dining experience</p>
+        <p className="text-xl text-gray-600">Book your table for fresh seafood dining experience</p>
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
@@ -804,15 +782,15 @@ const ReservationsPage = () => {
             <div className="space-y-3 text-gray-700">
               <div className="flex items-center gap-3">
                 <span>📞</span>
-                <span>(504) 555-CAJUN</span>
+                <span>(504) 555-FISH</span>
               </div>
               <div className="flex items-center gap-3">
                 <span>📍</span>
-                <span>123 Bourbon Street<br />New Orleans, LA 70116</span>
+                <span>123 Harbor Drive<br />Seaside, FL 32459</span>
               </div>
               <div className="flex items-center gap-3">
                 <span>✉️</span>
-                <span>info@cajuncuisine.com</span>
+                <span>info@blueanchorseafood.com</span>
               </div>
             </div>
           </Card>
@@ -922,7 +900,7 @@ const ContactPage = () => {
                 <span className="text-2xl">📍</span>
                 <div>
                   <h4 className="font-semibold">Address</h4>
-                  <p className="text-gray-600">123 Bourbon Street<br />New Orleans, LA 70116</p>
+                  <p className="text-gray-600">123 Harbor Drive<br />Seaside, FL 32459</p>
                 </div>
               </div>
               
@@ -930,7 +908,7 @@ const ContactPage = () => {
                 <span className="text-2xl">📞</span>
                 <div>
                   <h4 className="font-semibold">Phone</h4>
-                  <p className="text-gray-600">(504) 555-CAJUN</p>
+                  <p className="text-gray-600">(504) 555-FISH</p>
                 </div>
               </div>
               
@@ -938,7 +916,7 @@ const ContactPage = () => {
                 <span className="text-2xl">✉️</span>
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-gray-600">info@cajuncuisine.com</p>
+                  <p className="text-gray-600">info@blueanchorseafood.com</p>
                 </div>
               </div>
               
