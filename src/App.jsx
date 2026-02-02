@@ -452,7 +452,7 @@ const HomePage = () => {
 
 const MenuPage = () => {
   const menu = {
-    "� Appetizers": [
+    "🦐 Appetizers": [
       { name: "Coconut Shrimp", price: "$12.99", description: "Jumbo shrimp in crispy coconut coating with mango dipping sauce" },
       { name: "Crab Cakes", price: "$14.99", description: "Maryland-style crab cakes with chipotle aioli" },
       { name: "Calamari Rings", price: "$10.99", description: "Golden fried squid with marinara and lemon" },
@@ -581,7 +581,7 @@ const AboutPage = () => {
         <div className="grid md:grid-cols-3 gap-6">
           <Card className="hover:shadow-xl transition-shadow duration-300">
             <CardContent className="p-6 space-y-2">
-              <div className="text-4xl text-center">�</div>
+              <div className="text-4xl text-center">🐟</div>
               <h3 className="text-xl font-semibold text-center">Freshness</h3>
               <p className="text-gray-600 text-center">
                 Daily sourced seafood from trusted local fishermen and sustainable suppliers
@@ -647,6 +647,7 @@ const AboutPage = () => {
             </CardContent>
           </Card>
         </div>
+      </div>
       </div>
     </div>
   );
@@ -760,6 +761,7 @@ const OrderOnlinePage = () => {
             </div>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
@@ -972,6 +974,7 @@ const ReservationsPage = () => {
           </Card>
         </div>
       </div>
+      </div>
     </div>
   );
 };
@@ -1114,6 +1117,7 @@ const ContactPage = () => {
           </Card>
         </div>
       </div>
+      </div>
     </div>
   );
 };
@@ -1178,6 +1182,7 @@ const LoginPage = () => {
           <p className="text-sm">This is a demo login form</p>
         </div>
       </Card>
+      </div>
     </div>
   );
 };
