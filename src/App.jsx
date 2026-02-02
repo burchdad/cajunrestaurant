@@ -14,8 +14,42 @@ const Navbar = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               
+              {/* Logo */}
+              <Link to="/" className="flex items-center">
+                <div className="text-2xl font-bold text-white hover:text-blue-200 transition-colors duration-300">
+                  <span className="text-3xl mr-2">🦈</span>
+                  <span className="font-['Playfair_Display']">Blue Anchor</span>
+                </div>
+              </Link>
+
+              {/* Desktop Navigation - Hidden on mobile */}
+              <div className="hidden md:flex items-center space-x-8">
+                <Link to="/" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
+                  Home
+                </Link>
+                <Link to="/menu" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
+                  Menu
+                </Link>
+                <Link to="/about" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
+                  About
+                </Link>
+                <Link to="/order" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
+                  Order
+                </Link>
+                <Link to="/reservations" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
+                  Events
+                </Link>
+                <Link to="/contact" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
+                  Contact
+                </Link>
+                <Link to="/order">
+                  <Button size="sm" className="ml-4">
+                    Order Now
+                  </Button>
+                </Link>
+              </div>
               
-              {/* Mobile Menu Button */}
+              {/* Mobile Menu Button - Only visible on mobile */}
               <button 
                 className="md:hidden flex flex-col items-center justify-center w-12 h-12 focus:outline-none hover:bg-white/10 rounded-lg transition-all duration-300 group"
                 onClick={() => setIsOpen(!isOpen)}
@@ -30,8 +64,8 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      <div className={`sm:hidden fixed inset-x-0 top-20 z-40 transition-all duration-500 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
+      {/* Mobile Menu Overlay - Only visible on mobile */}
+      <div className={`md:hidden fixed inset-x-0 top-20 z-40 transition-all duration-500 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
         <div className="bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 backdrop-blur-xl border-b border-blue-600/50 shadow-2xl">
           <div className="container mx-auto px-6 py-8">
             {/* Mobile Navigation Grid */}
@@ -136,10 +170,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Backdrop */}
+      {/* Backdrop - Only on mobile */}
       {isOpen && (
         <div 
-          className="sm:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30 top-20"
+          className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30 top-20"
           onClick={() => setIsOpen(false)}
         />
       )}
@@ -504,7 +538,9 @@ const MenuPage = () => {
 
 const AboutPage = () => {
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-12">
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <div className="max-w-6xl mx-auto p-6 space-y-12 pt-24">
       {/* Hero Section */}
       <div className="text-center space-y-4">
         <h1 className="text-4xl md:text-5xl font-bold text-blue-700">About Us</h1>
@@ -659,7 +695,9 @@ const OrderOnlinePage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <div className="max-w-6xl mx-auto p-6 pt-24">
       <h1 className="text-4xl font-bold text-center mb-8">Order Online</h1>
       
       <div className="grid md:grid-cols-2 gap-8">
@@ -755,7 +793,9 @@ const ReservationsPage = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <div className="max-w-4xl mx-auto p-6 pt-24">
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Make a Reservation</h1>
         <p className="text-xl text-gray-600">Book your table for fresh seafood dining experience</p>
@@ -956,7 +996,9 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-12">
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <div className="max-w-6xl mx-auto p-6 space-y-12 pt-24">
       <div className="text-center">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Contact Us</h1>
         <p className="text-xl text-gray-600">Get in touch with us - we'd love to hear from you!</p>
@@ -1090,7 +1132,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 mt-16">
+    <div className="min-h-screen bg-white">
+      <Navbar />
+      <div className="max-w-md mx-auto p-6 pt-32">
       <Card className="p-8">
         <h2 className="text-3xl font-bold text-center mb-8">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
