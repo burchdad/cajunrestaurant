@@ -1,0 +1,33 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue shark logo -->
+  <g transform="translate(100,80)">
+    <!-- Shark body -->
+    <path d="M -60 -10 Q -55 -25 -35 -20 Q 0 -15 40 -8 Q 60 -5 70 0 Q 60 5 40 8 Q 0 15 -35 20 Q -55 25 -60 10 Z" fill="#4A90E2"/>
+    
+    <!-- Shark fins -->
+    <path d="M -45 -20 Q -35 -30 -25 -15" fill="#4A90E2"/>
+    <path d="M -45 20 Q -35 30 -25 15" fill="#4A90E2"/>
+    <path d="M 20 -8 Q 35 -18 25 -5" fill="#4A90E2"/>
+    
+    <!-- Shark tail -->
+    <path d="M -60 -10 Q -75 -5 -70 -20 Q -65 -15 -60 -10" fill="#4A90E2"/>
+    <path d="M -60 10 Q -75 5 -70 20 Q -65 15 -60 10" fill="#4A90E2"/>
+    
+    <!-- Shark eye -->
+    <circle cx="-30" cy="-5" r="3" fill="white"/>
+    <circle cx="-30" cy="-5" r="1.5" fill="black"/>
+    
+    <!-- Gill lines -->
+    <path d="M -20 -8 Q -15 -10 -15 -6" stroke="#3A7BC8" stroke-width="1" fill="none"/>
+    <path d="M -15 -8 Q -10 -10 -10 -6" stroke="#3A7BC8" stroke-width="1" fill="none"/>
+    <path d="M -10 -8 Q -5 -10 -5 -6" stroke="#3A7BC8" stroke-width="1" fill="none"/>
+    
+    <!-- Water bubbles -->
+    <circle cx="75" cy="-15" r="2" fill="#87CEEB" opacity="0.6"/>
+    <circle cx="80" cy="-20" r="1.5" fill="#87CEEB" opacity="0.4"/>
+    <circle cx="85" cy="-10" r="1" fill="#87CEEB" opacity="0.8"/>
+  </g>
+  
+  <!-- SEAFOOD text -->
+  <text x="100" y="140" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4A90E2" text-anchor="middle" letter-spacing="2px">SEAFOOD</text>
+</svg>

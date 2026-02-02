@@ -14,16 +14,8 @@ const Navbar = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-20">
               
-              {/* Logo */}
-              <Link to="/" className="flex items-center">
-                <div className="text-2xl font-bold text-white hover:text-blue-200 transition-colors duration-300">
-                  <span className="text-3xl mr-2">🦈</span>
-                  <span className="font-['Playfair_Display']">Blue Anchor</span>
-                </div>
-              </Link>
-
-              {/* Desktop Navigation - Hidden on mobile */}
-              <div className="hidden md:flex items-center space-x-8">
+              {/* Left Navigation - Hidden on mobile */}
+              <div className="hidden md:flex items-center space-x-6">
                 <Link to="/" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
                   Home
                 </Link>
@@ -33,6 +25,19 @@ const Navbar = () => {
                 <Link to="/about" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
                   About
                 </Link>
+              </div>
+
+              {/* Center Logo */}
+              <Link to="/" className="flex items-center">
+                <img 
+                  src="/blue-anchor-logo.svg" 
+                  alt="Blue Anchor Seafood" 
+                  className="h-16 w-auto hover:scale-105 transition-transform duration-300"
+                />
+              </Link>
+
+              {/* Right Navigation - Hidden on mobile */}
+              <div className="hidden md:flex items-center space-x-6">
                 <Link to="/order" className="text-white hover:text-blue-200 transition-colors duration-300 font-medium">
                   Order
                 </Link>
