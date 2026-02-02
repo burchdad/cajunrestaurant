@@ -119,7 +119,7 @@ const Navbar = () => {
                 </Link>
                 <Link to="/reservations" onClick={() => setIsOpen(false)}>
                   <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg font-semibold">
-                    📞 Call (504) 555-FISH
+                    🎉 Book Event
                   </Button>
                 </Link>
               </div>
@@ -129,7 +129,7 @@ const Navbar = () => {
             <div className="border-t border-white/20 pt-6 mt-6">
               <div className="text-center text-sm text-gray-300">
                 <p className="mb-2">📍 123 Harbor Drive, Seaside, FL</p>
-                <p>🕒 Open Daily: Mon-Thu 11AM-9PM | Fri-Sat 11AM-10PM | Sun 12PM-8PM</p>
+                <p>🕒 Open: Tue-Sun 11AM-9PM | No Reservations</p>
               </div>
             </div>
           </div>
@@ -208,24 +208,6 @@ const HomePage = () => {
     }
   ];
 
-  const features = [
-    { 
-      title: "Ocean Fresh", 
-      icon: "🌊", 
-      description: "Daily catches from local fishing fleets and sustainable sources" 
-    },
-    { 
-      title: "Coastal Comfort", 
-      icon: "🏖️", 
-      description: "Warm hospitality with recipes from seaside traditions" 
-    },
-    { 
-      title: "Family Anchored", 
-      icon: "⚓", 
-      description: "A welcoming harbor where everyone feels at home" 
-    }
-  ];
-
   return (
     <div className="bg-gradient-to-b from-gray-50 to-white">
       <Hero />
@@ -243,49 +225,188 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 relative">
-        <div className="absolute inset-0 pattern-lines opacity-10"></div>
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-16 animate-fadeIn">
-            <h2 className="text-5xl font-bold text-white mb-4 font-['Playfair_Display']">What Sets Our Anchor</h2>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">Three pillars that define our commitment to exceptional seafood dining</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {features.map((feature, i) => (
-              <Card key={i} variant="glass" className="text-center p-8 group animate-fadeInScale" style={{animationDelay: `${i * 0.2}s`}}>
-                <div className="text-6xl mb-6 animate-float group-hover:scale-110 transition-transform duration-300" style={{animationDelay: `${i * 0.5}s`}}>
-                  {feature.icon}
-                </div>
-                <CardContent className="p-0">
-                  <h3 className="text-2xl font-bold text-white mb-4 font-['Playfair_Display']">{feature.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+      {/* About Us Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12 animate-fadeIn">
+            <h2 className="text-5xl font-bold text-gray-800 mb-8 font-['Playfair_Display']">About Us</h2>
+            <h3 className="text-2xl font-semibold text-blue-700 mb-6">WE'RE PROUD OF ALL OF OUR SEAFOOD</h3>
+            <div className="max-w-4xl mx-auto">
+              <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                Blue Anchor Seafood Restaurant & Oyster Bar is your premier destination for fresh, 
+                locally-sourced seafood. Located in the heart of the coastal district, our restaurant 
+                is family-owned and operated, and we proudly serve only the finest ocean-to-table cuisine.
+              </p>
+              <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                From our signature crab cakes to our daily fresh catches, every dish is prepared with 
+                passion and the highest quality ingredients. Our commitment to excellence has made us 
+                a beloved destination for seafood lovers and families alike.
+              </p>
+              <Button size="lg" className="text-lg px-8">
+                READ MORE ABOUT US
+              </Button>
+            </div>
           </div>
         </div>
       </section>
       
-      {/* Call to Action Section */}
-      <section className="py-20 bg-gradient-to-r from-yellow-50 to-red-50">
-        <div className="container mx-auto px-6 text-center animate-fadeInScale">
-          <h2 className="text-4xl font-bold text-gray-800 mb-6 font-['Playfair_Display']">Ready for a Fresh Experience?</h2>
-          <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">Join us for a culinary voyage through the ocean's finest treasures</p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/order">
-              <Button size="xl" className="text-lg px-10">
-                🛒 Order Online
-              </Button>
-            </Link>
-            <Link to="/reservations">
-              <Button variant="outline" size="xl" className="text-lg px-10">
-                📅 Make Reservation
-              </Button>
-            </Link>
+      {/* Live Music Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12 animate-fadeIn">
+            <h2 className="text-5xl font-bold text-gray-800 mb-6 font-['Playfair_Display']">Live Music</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+              Your destination for the best music! Join us for live performances every weekend.
+            </p>
+            <Button size="lg" className="text-lg px-10">
+              🎵 VIEW MUSIC SCHEDULE
+            </Button>
           </div>
         </div>
       </section>
+
+      {/* Parties Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="animate-fadeInScale">
+              <h2 className="text-5xl font-bold text-gray-800 mb-6 font-['Playfair_Display']">Parties</h2>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                You worry about your guests and we will take care of the rest! Let us host your party.
+              </p>
+              <Button size="lg" className="text-lg px-10">
+                🎉 BOOK A PARTY
+              </Button>
+            </div>
+            <div 
+              className="h-80 rounded-lg bg-cover bg-center shadow-lg animate-fadeInScale"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800')" }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Catering Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div 
+              className="h-80 rounded-lg bg-cover bg-center shadow-lg animate-fadeInScale order-2 md:order-1"
+              style={{ backgroundImage: "url('https://images.unsplash.com/photo-1555244162-803834f70033?w=800')" }}
+            />
+            <div className="animate-fadeInScale order-1 md:order-2">
+              <h2 className="text-5xl font-bold text-gray-800 mb-6 font-['Playfair_Display']">Catering</h2>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                Fine food is very important at any event - book catering with us and make sure 
+                people talk about your event for a long time!
+              </p>
+              <h3 className="text-2xl font-semibold text-blue-700 mb-6">
+                We master the art of outdoor Catering.
+              </h3>
+              <Button size="lg" className="text-lg px-10">
+                🍽️ ORDER CATERING
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Reviews Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-12 animate-fadeIn">
+            <h2 className="text-5xl font-bold text-gray-800 mb-6 font-['Playfair_Display']">Reviews</h2>
+            <div className="max-w-4xl mx-auto">
+              <Card className="p-8 mb-8">
+                <h3 className="text-xl font-semibold text-blue-700 mb-4">REVIEW BY - CUSTOMER</h3>
+                <h4 className="text-lg font-medium mb-4">Sarah M:</h4>
+                <blockquote className="text-lg text-gray-600 italic leading-relaxed">
+                  "The crab cakes were absolutely amazing! I had the grilled salmon which was perfection. 
+                  We had the best server ever and can't wait to come back. The waterfront views are spectacular!!"
+                </blockquote>
+              </Card>
+              <Card className="p-8">
+                <h3 className="text-xl font-semibold text-blue-700 mb-4">REVIEW BY - CUSTOMER</h3>
+                <h4 className="text-lg font-medium mb-4">Mike T:</h4>
+                <blockquote className="text-lg text-gray-600 italic leading-relaxed">
+                  "Best seafood restaurant in the area! Fresh catch daily, incredible lobster bisque, 
+                  and the staff treats you like family. The Blue Anchor is our new favorite spot!"
+                </blockquote>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="py-20 bg-blue-900 text-white">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-2xl mx-auto animate-fadeIn">
+            <h2 className="text-4xl font-bold mb-6 font-['Playfair_Display']">Newsletter</h2>
+            <h3 className="text-xl mb-8">Sign up for our newsletter & get exclusive offers and invites!</h3>
+            <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input 
+                type="email" 
+                placeholder="Email (required)" 
+                className="flex-1 p-3 rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-500"
+                required 
+              />
+              <Button variant="secondary" size="lg" type="submit">
+                SUBMIT
+              </Button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-16">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            {/* Location */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4 font-['Playfair_Display']">Location</h3>
+              <p className="text-lg">123 Harbor Drive</p>
+              <p className="text-lg">Seaside, FL 32459</p>
+            </div>
+            
+            {/* Hours */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4 font-['Playfair_Display']">Hours</h3>
+              <p className="text-lg">Tuesday - Sunday</p>
+              <p className="text-lg">11:00 AM - 9:00 PM</p>
+              <p className="text-sm text-gray-400 mt-2">No Reservations</p>
+            </div>
+            
+            {/* Contact */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold mb-4 font-['Playfair_Display']">Contact Us</h3>
+              <p className="text-lg mb-2">
+                <a href="tel:+15045555347" className="hover:text-blue-400 transition-colors">
+                  (504) 555-FISH
+                </a>
+              </p>
+              <p className="text-lg">
+                <a href="mailto:info@blueanchorseafood.com" className="hover:text-blue-400 transition-colors">
+                  info@blueanchorseafood.com
+                </a>
+              </p>
+            </div>
+          </div>
+          
+          {/* Social Media & Additional Info */}
+          <div className="border-t border-gray-700 pt-8 text-center">
+            <div className="flex justify-center gap-6 mb-6">
+              <h4 className="text-lg font-semibold">Find Us On...</h4>
+              <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">Facebook</a>
+              <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">Instagram</a>
+            </div>
+            <p className="text-gray-400">
+              Blue Anchor Seafood Restaurant & Oyster Bar - Fresh Ocean to Table Excellence
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
