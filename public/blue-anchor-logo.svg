@@ -1,33 +1,59 @@
-<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Blue shark logo -->
-  <g transform="translate(100,80)">
-    <!-- Shark body -->
-    <path d="M -60 -10 Q -55 -25 -35 -20 Q 0 -15 40 -8 Q 60 -5 70 0 Q 60 5 40 8 Q 0 15 -35 20 Q -55 25 -60 10 Z" fill="#4A90E2"/>
+<svg width="300" height="120" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <rect width="300" height="120" fill="transparent"/>
+  
+  <!-- Shark illustration -->
+  <g transform="translate(75,35)">
+    <!-- Main shark body -->
+    <path d="M -40 0 Q -35 -15 -20 -18 Q 0 -20 25 -15 Q 45 -10 55 -5 Q 60 0 55 5 Q 45 10 25 15 Q 0 20 -20 18 Q -35 15 -40 0 Z" fill="#5BA3D4" stroke="#4A8BC2" stroke-width="1"/>
     
-    <!-- Shark fins -->
-    <path d="M -45 -20 Q -35 -30 -25 -15" fill="#4A90E2"/>
-    <path d="M -45 20 Q -35 30 -25 15" fill="#4A90E2"/>
-    <path d="M 20 -8 Q 35 -18 25 -5" fill="#4A90E2"/>
+    <!-- Shark belly -->
+    <path d="M -35 0 Q -30 8 -15 10 Q 10 12 35 8 Q 50 5 52 0 Q 45 3 25 7 Q 0 10 -20 8 Q -30 5 -35 0" fill="#87CEEB" opacity="0.8"/>
     
-    <!-- Shark tail -->
-    <path d="M -60 -10 Q -75 -5 -70 -20 Q -65 -15 -60 -10" fill="#4A90E2"/>
-    <path d="M -60 10 Q -75 5 -70 20 Q -65 15 -60 10" fill="#4A90E2"/>
+    <!-- Dorsal fin -->
+    <path d="M 10 -20 Q 15 -35 25 -28 Q 20 -18 15 -15 Q 12 -17 10 -20" fill="#4A8BC2"/>
+    
+    <!-- Pectoral fins -->
+    <path d="M -15 5 Q -25 15 -10 18 Q -8 12 -15 5" fill="#4A8BC2"/>
+    <path d="M 20 8 Q 30 18 35 12 Q 28 8 20 8" fill="#4A8BC2"/>
+    
+    <!-- Tail fin -->
+    <path d="M -40 0 Q -55 -8 -50 -20 Q -45 -10 -40 -5 Z" fill="#4A8BC2"/>
+    <path d="M -40 0 Q -55 8 -50 20 Q -45 10 -40 5 Z" fill="#4A8BC2"/>
     
     <!-- Shark eye -->
-    <circle cx="-30" cy="-5" r="3" fill="white"/>
-    <circle cx="-30" cy="-5" r="1.5" fill="black"/>
+    <circle cx="-15" cy="-8" r="4" fill="white"/>
+    <circle cx="-15" cy="-8" r="2" fill="#333"/>
+    <circle cx="-14" cy="-9" r="1" fill="white"/>
     
-    <!-- Gill lines -->
-    <path d="M -20 -8 Q -15 -10 -15 -6" stroke="#3A7BC8" stroke-width="1" fill="none"/>
-    <path d="M -15 -8 Q -10 -10 -10 -6" stroke="#3A7BC8" stroke-width="1" fill="none"/>
-    <path d="M -10 -8 Q -5 -10 -5 -6" stroke="#3A7BC8" stroke-width="1" fill="none"/>
+    <!-- Gill slits -->
+    <path d="M -8 -5 Q -5 -8 -5 -2" stroke="#4A8BC2" stroke-width="1.5" fill="none"/>
+    <path d="M -3 -5 Q 0 -8 0 -2" stroke="#4A8BC2" stroke-width="1.5" fill="none"/>
+    <path d="M 2 -5 Q 5 -8 5 -2" stroke="#4A8BC2" stroke-width="1.5" fill="none"/>
+    
+    <!-- Anchor overlay on shark -->
+    <g transform="translate(5,-5) scale(0.6)">
+      <!-- Anchor shaft -->
+      <rect x="-1" y="-8" width="2" height="16" fill="#2E5984"/>
+      <!-- Anchor crossbar -->
+      <rect x="-6" y="-2" width="12" height="2" fill="#2E5984" rx="1"/>
+      <!-- Anchor flukes -->
+      <path d="M -1 8 Q -8 12 -6 16 Q -3 12 -1 8" fill="#2E5984"/>
+      <path d="M 1 8 Q 8 12 6 16 Q 3 12 1 8" fill="#2E5984"/>
+      <!-- Anchor ring -->
+      <circle cx="0" cy="-8" r="3" fill="none" stroke="#2E5984" stroke-width="1.5"/>
+    </g>
     
     <!-- Water bubbles -->
-    <circle cx="75" cy="-15" r="2" fill="#87CEEB" opacity="0.6"/>
-    <circle cx="80" cy="-20" r="1.5" fill="#87CEEB" opacity="0.4"/>
-    <circle cx="85" cy="-10" r="1" fill="#87CEEB" opacity="0.8"/>
+    <circle cx="65" cy="-12" r="2" fill="#B8E3FF" opacity="0.7"/>
+    <circle cx="70" cy="-18" r="1.5" fill="#B8E3FF" opacity="0.5"/>
+    <circle cx="75" cy="-8" r="1" fill="#B8E3FF" opacity="0.9"/>
+    <circle cx="68" cy="-5" r="1.5" fill="#B8E3FF" opacity="0.6"/>
   </g>
   
+  <!-- BLUE ANCHOR text -->
+  <text x="150" y="85" font-family="'Arial Black', Arial, sans-serif" font-size="20" font-weight="900" fill="#2E5984" text-anchor="middle" letter-spacing="1px">BLUE ANCHOR</text>
+  
   <!-- SEAFOOD text -->
-  <text x="100" y="140" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#4A90E2" text-anchor="middle" letter-spacing="2px">SEAFOOD</text>
+  <text x="150" y="105" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#5BA3D4" text-anchor="middle" letter-spacing="3px">SEAFOOD</text>
 </svg>
