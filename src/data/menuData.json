@@ -1,0 +1,501 @@
+{
+  "categories": [
+    { "id": "appetizers", "label": "Appetizers", "icon": "🦐" },
+    { "id": "mains", "label": "Main Entrés", "icon": "🍽️" },
+    { "id": "sides", "label": "Sides", "icon": "🥗" },
+    { "id": "kids", "label": "Kid's Meals", "icon": "🧒" },
+    { "id": "desserts", "label": "Desserts", "icon": "🍰" },
+    { "id": "drinks", "label": "Drinks", "icon": "🥤" }
+  ],
+  "menuItems": {
+    "appetizers": [
+      {
+        "id": "app001",
+        "name": "Coconut Shrimp",
+        "price": "12.99",
+        "description": "Jumbo shrimp in crispy coconut coating with mango dipping sauce",
+        "image": "/photos/Appetizers/coconut-shrimp.jpg",
+        "category": "appetizers",
+        "active": true
+      },
+      {
+        "id": "app002",
+        "name": "Crab Cakes",
+        "price": "14.99",
+        "description": "Maryland-style crab cakes with chipotle aioli",
+        "image": "/photos/Appetizers/crab-cakes.png",
+        "category": "appetizers",
+        "active": true
+      },
+      {
+        "id": "app003",
+        "name": "Calamari Rings",
+        "price": "10.99",
+        "description": "Golden fried squid with marinara and lemon",
+        "image": "/photos/Appetizers/calamari-rings.png",
+        "category": "appetizers",
+        "active": true
+      },
+      {
+        "id": "app004",
+        "name": "Oysters Rockefeller",
+        "price": "13.99",
+        "description": "Fresh oysters with spinach, herbs, and parmesan",
+        "image": "/photos/Appetizers/oysters-rockefeller.jpg",
+        "category": "appetizers",
+        "active": true
+      },
+      {
+        "id": "app005",
+        "name": "Stuffed Mushrooms",
+        "price": "11.99",
+        "description": "Button mushrooms stuffed with seasoned crabmeat and herbs, topped with melted cheese",
+        "image": "/photos/Appetizers/stuffed-mushrooms.jpg",
+        "category": "appetizers",
+        "active": true
+      },
+      {
+        "id": "app006",
+        "name": "3 Dip Platter",
+        "price": "13.99",
+        "description": "Triple threat of our house-made queso, creamy spinach dip, and red coastal salsa with tortilla chips",
+        "image": "/photos/Appetizers/3-dip-platter.png",
+        "category": "appetizers",
+        "active": true
+      }
+    ],
+    "mains": [
+      {
+        "id": "main001",
+        "name": "Grilled Salmon",
+        "price": "22.99",
+        "description": "Atlantic salmon with lemon herb butter and seasonal vegetables",
+        "image": "/photos/Main Entres/grilled-salmon.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main002",
+        "name": "Lobster Tail Dinner",
+        "price": "34.99",
+        "description": "Two lobster tails with drawn butter and garlic mashed potatoes",
+        "image": "/photos/Main Entres/lobster-tail-dinner.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main003",
+        "name": "Fish & Chips",
+        "price": "18.99",
+        "description": "Beer-battered cod with hand-cut fries and coleslaw",
+        "image": "/photos/Main Entres/fish-and-chips.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main004",
+        "name": "Seafood Paella",
+        "price": "26.99",
+        "description": "Saffron rice with shrimp, mussels, clams, and calamari",
+        "image": "/photos/Main Entres/seafood-paella.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main005",
+        "name": "Blackened Mahi Mahi",
+        "price": "21.99",
+        "description": "Spice-crusted mahi mahi with coconut rice and mango salsa",
+        "image": "/photos/Main Entres/blackened-mahi-mahi.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main006",
+        "name": "New England Clam Chowder",
+        "price": "16.99",
+        "description": "Creamy chowder served in a sourdough bread bowl",
+        "image": "/photos/Main Entres/new-england-clam-chowder.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main007",
+        "name": "Shrimp Scampi",
+        "price": "19.99",
+        "description": "Garlic butter shrimp over linguine pasta",
+        "image": "/photos/Main Entres/shrimp-scampi.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main008",
+        "name": "Redfish with Wild Rice",
+        "price": "24.99",
+        "description": "Gulf redfish fillet served with steamed wild rice and fresh asparagus spears",
+        "image": "/photos/Main Entres/redfish-wild-rice.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main009",
+        "name": "Crusted Flounder",
+        "price": "23.99",
+        "description": "Herb-crusted flounder with roasted Brussels sprouts and red potatoes",
+        "image": "/photos/Main Entres/crusted-flounder.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main010",
+        "name": "Cedar Plank Salmon",
+        "price": "25.99",
+        "description": "Cedar-planked Atlantic salmon with fresh asparagus and rustic mashed potatoes",
+        "image": "/photos/Main Entres/cedar-plank-salmon.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main011",
+        "name": "Tilapia Tacos",
+        "price": "17.99",
+        "description": "Three soft shell tacos with grilled or fried tilapia, boss dressing, and fresh coleslaw",
+        "image": "/photos/Main Entres/tilapia-tacos.jpg",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main012",
+        "name": "Catfish Platter",
+        "price": "19.99",
+        "description": "Southern-fried catfish with golden hush puppies, seasoned fries, and creamy coleslaw",
+        "image": "/photos/Main Entres/catfish-platter.png",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main013",
+        "name": "Pan Seared Mahi Mahi",
+        "price": "22.99",
+        "description": "Pan-seared mahi mahi with tropical pineapple salsa, steamed green beans, and house salad",
+        "image": "/photos/Main Entres/pan-seared-mahi-mahi.png",
+        "category": "mains",
+        "active": true
+      },
+      {
+        "id": "main014",
+        "name": "Surf and Turf",
+        "price": "39.99",
+        "description": "Grilled filet mignon and lobster tail served with our signature lobster mac and cheese",
+        "image": "/photos/Main Entres/surf-and-turf.png",
+        "category": "mains",
+        "active": true
+      }
+    ],
+    "sides": [
+      {
+        "id": "side001",
+        "name": "Garlic Mashed Potatoes",
+        "price": "6.99",
+        "description": "Creamy potatoes with roasted garlic",
+        "image": "/photos/Sides/garlic-mashed-potatoes.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side002",
+        "name": "Grilled Asparagus",
+        "price": "7.99",
+        "description": "Fresh asparagus with lemon and parmesan",
+        "image": "/photos/Sides/grilled-asparagus.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side003",
+        "name": "Coconut Rice",
+        "price": "5.99",
+        "description": "Jasmine rice cooked in coconut milk",
+        "image": "/photos/Sides/coconut-rice.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side004",
+        "name": "Coleslaw",
+        "price": "4.99",
+        "description": "Fresh cabbage slaw with tangy dressing",
+        "image": "/photos/Sides/coleslaw.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side005",
+        "name": "Sweet Potato Fries",
+        "price": "6.99",
+        "description": "Hand-cut fries with sea salt",
+        "image": "/photos/Sides/sweet-potato-fries.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side006",
+        "name": "Steamed Wild Rice",
+        "price": "6.99",
+        "description": "Nutty long-grain wild rice steamed to perfection",
+        "image": "/photos/Sides/steamed-wild-rice.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side007",
+        "name": "Seasoned Fries",
+        "price": "5.99",
+        "description": "Crispy golden fries seasoned with our house spice blend",
+        "image": "/photos/Sides/seasoned-fries.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side008",
+        "name": "Creamed Spinach",
+        "price": "7.99",
+        "description": "Fresh spinach in a rich cream sauce with garlic and herbs",
+        "image": "/photos/Sides/creamed-spinach.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side009",
+        "name": "Rustic Mashed Potatoes",
+        "price": "6.99",
+        "description": "Chunky mashed potatoes with butter and fresh herbs",
+        "image": "/photos/Sides/rustic-mashed-potatoes.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side010",
+        "name": "House Salad",
+        "price": "7.99",
+        "description": "Mixed greens, cherry tomatoes, cucumbers, and red onions with choice of dressing",
+        "image": "/photos/Sides/house-salad.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side011",
+        "name": "Steamed Green Beans",
+        "price": "6.99",
+        "description": "Fresh green beans steamed with almonds and butter",
+        "image": "/photos/Sides/steamed-green-beans.jpg",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side012",
+        "name": "Lobster Mac and Cheese",
+        "price": "14.99",
+        "description": "Three-cheese macaroni loaded with chunks of fresh lobster meat",
+        "image": "/photos/Sides/lobster-mac-cheese.png",
+        "category": "sides",
+        "active": true
+      },
+      {
+        "id": "side013",
+        "name": "Roasted Red Potatoes",
+        "price": "6.99",
+        "description": "Baby red potatoes roasted with rosemary and olive oil",
+        "image": "/photos/Sides/roasted-red-potatoes.jpg",
+        "category": "sides",
+        "active": true
+      }
+    ],
+    "kids": [
+      {
+        "id": "kids001",
+        "name": "Fish Sticks & Fries",
+        "price": "8.99",
+        "description": "Crispy fish sticks with seasoned fries and ketchup",
+        "image": "/photos/Kid's Meals/fish-sticks-and-fries.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids002",
+        "name": "Mini Crab Cakes",
+        "price": "9.99",
+        "description": "Two small crab cakes with mashed potatoes and green beans",
+        "image": "/photos/Kid's Meals/mini-crab-cakes.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids003",
+        "name": "Popcorn Shrimp",
+        "price": "7.99",
+        "description": "Bite-sized breaded shrimp with honey mustard",
+        "image": "/photos/Kid's Meals/popcorn-shrimp.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids004",
+        "name": "Grilled Cheese & Tomato Soup",
+        "price": "6.99",
+        "description": "Classic grilled cheese with creamy tomato soup",
+        "image": "/photos/Kid's Meals/grilled-cheese-and-tomato-soup.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids005",
+        "name": "Chicken Strips",
+        "price": "8.99",
+        "description": "Golden fried chicken tenders with choice of dipping sauce and fries",
+        "image": "/photos/Kid's Meals/chicken-strips.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids006",
+        "name": "Homemade Craft Pizza",
+        "price": "9.99",
+        "description": "Personal-sized pizza with choice of cheese or pepperoni toppings",
+        "image": "/photos/Kid's Meals/craft-pizza.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids007",
+        "name": "Fried Shrimp",
+        "price": "9.99",
+        "description": "Lightly breaded fried shrimp with cocktail sauce and fries",
+        "image": "/photos/Kid's Meals/fried-shrimp.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids008",
+        "name": "Fried Cod",
+        "price": "8.99",
+        "description": "Crispy fried cod pieces with tartar sauce and seasoned fries",
+        "image": "/photos/Kid's Meals/fried-cod.jpg",
+        "category": "kids",
+        "active": true
+      },
+      {
+        "id": "kids009",
+        "name": "Mac and Cheese",
+        "price": "7.99",
+        "description": "Creamy three-cheese macaroni with buttered breadcrumbs",
+        "image": "/photos/Kid's Meals/mac-and-cheese.jpg",
+        "category": "kids",
+        "active": true
+      }
+    ],
+    "desserts": [
+      {
+        "id": "dessert001",
+        "name": "Key Lime Pie",
+        "price": "7.99",
+        "description": "Traditional Florida key lime pie with graham cracker crust",
+        "image": "/photos/Desserts/key-lime-pie.jpg",
+        "category": "desserts",
+        "active": true
+      },
+      {
+        "id": "dessert002",
+        "name": "Bread Pudding",
+        "price": "8.99",
+        "description": "New Orleans-style bread pudding with whiskey sauce",
+        "image": "/photos/Desserts/bread-pudding.jpg",
+        "category": "desserts",
+        "active": true
+      },
+      {
+        "id": "dessert003",
+        "name": "Chocolate Lava Cake",
+        "price": "9.99",
+        "description": "Warm chocolate cake with molten center and vanilla ice cream",
+        "image": "/photos/Desserts/chocolate-lava-cake.jpg",
+        "category": "desserts",
+        "active": true
+      },
+      {
+        "id": "dessert004",
+        "name": "Coconut Panna Cotta",
+        "price": "6.99",
+        "description": "Creamy coconut custard with tropical fruit compote",
+        "image": "/photos/Desserts/coconut-panna-cotta.jpg",
+        "category": "desserts",
+        "active": true
+      },
+      {
+        "id": "dessert005",
+        "name": "Brownie Sundae",
+        "price": "9.99",
+        "description": "Warm fudge brownie topped with chocolate ice cream and cinnamon chips",
+        "image": "/photos/Desserts/brownie-sundae.jpg",
+        "category": "desserts",
+        "active": true
+      },
+      {
+        "id": "dessert006",
+        "name": "Tiramisu",
+        "price": "8.99",
+        "description": "Classic Italian dessert with coffee-soaked ladyfingers and mascarpone cream",
+        "image": "/photos/Desserts/tiramisu.jpg",
+        "category": "desserts",
+        "active": true
+      },
+      {
+        "id": "dessert007",
+        "name": "Creambole with Masquerade Berries",
+        "price": "8.99",
+        "description": "Light pastry shell filled with vanilla cream and topped with seasonal masquerade berries",
+        "image": "/photos/Desserts/creambole-masquerade-berries.jpg",
+        "category": "desserts",
+        "active": true
+      }
+    ],
+    "drinks": [
+      {
+        "id": "drink001",
+        "name": "Hurricane",
+        "price": "12.99",
+        "description": "Classic New Orleans cocktail with rum and passion fruit",
+        "image": "/photos/Drinks/hurricane.jpg",
+        "category": "drinks",
+        "active": true
+      },
+      {
+        "id": "drink002",
+        "name": "Craft Beer Selection",
+        "price": "5.99-8.99",
+        "description": "Local and imported beers on tap and bottled",
+        "image": "/photos/Drinks/craft-beer-selection.jpg",
+        "category": "drinks",
+        "active": true
+      },
+      {
+        "id": "drink003",
+        "name": "Fresh Lemonade",
+        "price": "3.99",
+        "description": "House-made lemonade with fresh lemons",
+        "image": "/photos/Drinks/fresh-lemonade.jpg",
+        "category": "drinks",
+        "active": true
+      },
+      {
+        "id": "drink004",
+        "name": "Coffee & Espresso",
+        "price": "2.99-4.99",
+        "description": "Premium coffee drinks and specialty espresso",
+        "image": "/photos/Drinks/coffee-and-espresso.jpg",
+        "category": "drinks",
+        "active": true
+      }
+    ]
+  }
+}

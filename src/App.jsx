@@ -9,6 +9,10 @@ import OrderOnlinePage from "./pages/OrderOnlinePage";
 import ReservationsPage from "./pages/ReservationsPage";
 import ContactPage from "./pages/ContactPage";
 import LoginPage from "./pages/LoginPage";
+import StaffLoginPage from "./pages/StaffLoginPage";
+import StaffDashboard from "./pages/StaffDashboard";
+import DineInOrderPage from "./pages/DineInOrderPage";
+import CareersPage from "./pages/CareersPage";
 
 function App() {
   return (
@@ -20,10 +24,14 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/menu" element={<MenuPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/careers" element={<CareersPage />} />
             <Route path="/order" element={<OrderOnlinePage />} />
+            <Route path="/dine-in" element={<DineInOrderPage />} />
             <Route path="/reservations" element={<ReservationsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/staff" element={<StaffLoginPage />} />
+            <Route path="/staff/dashboard" element={<StaffDashboard />} />
           </Routes>
         </main>
         <Footer />

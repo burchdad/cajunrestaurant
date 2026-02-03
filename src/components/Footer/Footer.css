@@ -201,6 +201,7 @@
   display: flex;
   gap: 1.5rem;
   margin-top: 1rem;
+  justify-content: center;
 }
 
 .legal-link {
@@ -212,6 +213,15 @@
 
 .legal-link:hover {
   color: #e3f2fd;
+}
+
+.staff-link {
+  opacity: 0.7;
+  font-size: 0.8rem;
+}
+
+.staff-link:hover {
+  opacity: 1;
 }
 
 /* Responsive Design */
@@ -290,10 +300,4 @@
   text-align: center;
   color: #9ca3af;
   font-size: 0.875rem;
-}
-
-@media (min-width: 768px) {
-  .footer-bottom-content {
-    text-align: left;
-  }
 }

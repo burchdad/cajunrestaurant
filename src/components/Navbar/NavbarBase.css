@@ -198,6 +198,15 @@
   font-weight: 600;
 }
 
+.mobile-login-btn {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.mobile-login-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 @media (min-width: 640px) {
   .mobile-nav-button {
     width: auto;
@@ -229,6 +238,12 @@
   backdrop-filter: blur(4px);
   z-index: 30;
   top: 5rem;
+}
+
+@media (max-width: 640px) {
+  .mobile-backdrop {
+    top: 5rem;
+  }
 }
 
 @media (min-width: 1024px) {

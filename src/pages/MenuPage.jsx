@@ -1,203 +1,42 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "../components/ui/button";
 import { Card, CardContent } from "../components/ui/card";
+import menuDataFile from "../data/menuData.json";
 import "./MenuPage.css";
 
 const MenuPage = () => {
   const [activeCategory, setActiveCategory] = useState('appetizers');
+  const [menuData, setMenuData] = useState(null);
+  const [categories, setCategories] = useState([]);
   const printRef = useRef();
 
-  const categories = [
-    { id: 'appetizers', label: 'Appetizers', icon: '🦐' },
-    { id: 'mains', label: 'Main Entrés', icon: '🍽️' },
-    { id: 'sides', label: 'Sides', icon: '🥗' },
-    { id: 'kids', label: "Kid's Meals", icon: '🧒' },
-    { id: 'desserts', label: 'Desserts', icon: '🍰' },
-    { id: 'drinks', label: 'Drinks', icon: '🥤' }
-  ];
+  // Load menu data on component mount
+  useEffect(() => {
+    // Try to load from localStorage first (if staff has made changes)
+    const savedData = localStorage.getItem('menuData');
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
+      setMenuData(parsedData);
+      setCategories(parsedData.categories);
+    } else {
+      // Fall back to static JSON file
+      setMenuData(menuDataFile);
+      setCategories(menuDataFile.categories);
+    }
+  }, []);
 
-  const menuData = {
-    appetizers: [
-      { 
-        name: "Coconut Shrimp", 
-        price: "$12.99", 
-        description: "Jumbo shrimp in crispy coconut coating with mango dipping sauce",
-        image: "/photos/Appetizers/coconut-shrimp.jpg"
-      },
-      { 
-        name: "Crab Cakes", 
-        price: "$14.99", 
-        description: "Maryland-style crab cakes with chipotle aioli",
-        image: "/photos/Appetizers/crab-cakes.png"
-      },
-      { 
-        name: "Calamari Rings", 
-        price: "$10.99", 
-        description: "Golden fried squid with marinara and lemon",
-        image: "/photos/Appetizers/calamari-rings.png"
-      },
-      { 
-        name: "Oysters Rockefeller", 
-        price: "$13.99", 
-        description: "Fresh oysters with spinach, herbs, and parmesan",
-        image: "/photos/Appetizers/oysters-rockefeller.jpg"
-      }
-    ],
-    mains: [
-      { 
-        name: "Grilled Salmon", 
-        price: "$22.99", 
-        description: "Atlantic salmon with lemon herb butter and seasonal vegetables",
-        image: "/photos/Main Entres/grilled-salmon.jpg"
-      },
-      { 
-        name: "Lobster Tail Dinner", 
-        price: "$34.99", 
-        description: "Two lobster tails with drawn butter and garlic mashed potatoes",
-        image: "/photos/Main Entres/lobster-tail-dinner.jpg"
-      },
-      { 
-        name: "Fish & Chips", 
-        price: "$18.99", 
-        description: "Beer-battered cod with hand-cut fries and coleslaw",
-        image: "/photos/Main Entres/fish-and-chips.jpg"
-      },
-      { 
-        name: "Seafood Paella", 
-        price: "$26.99", 
-        description: "Saffron rice with shrimp, mussels, clams, and calamari",
-        image: "/photos/Main Entres/seafood-paella.jpg"
-      },
-      { 
-        name: "Blackened Mahi Mahi", 
-        price: "$21.99", 
-        description: "Spice-crusted mahi mahi with coconut rice and mango salsa",
-        image: "/photos/Main Entres/blackened-mahi-mahi.jpg"
-      },
-      { 
-        name: "New England Clam Chowder", 
-        price: "$16.99", 
-        description: "Creamy chowder served in a sourdough bread bowl",
-        image: "/photos/Main Entres/new-england-clam-chowder.jpg"
-      },
-      { 
-        name: "Shrimp Scampi", 
-        price: "$19.99", 
-        description: "Garlic butter shrimp over linguine pasta",
-        image: "/photos/Main Entres/shrimp-scampi.jpg"
-      }
-    ],
-    sides: [
-      { 
-        name: "Garlic Mashed Potatoes", 
-        price: "$6.99", 
-        description: "Creamy potatoes with roasted garlic",
-        image: "/photos/Sides/garlic-mashed-potatoes.jpg"
-      },
-      { 
-        name: "Grilled Asparagus", 
-        price: "$7.99", 
-        description: "Fresh asparagus with lemon and parmesan",
-        image: "/photos/Sides/grilled-asparagus.jpg"
-      },
-      { 
-        name: "Coconut Rice", 
-        price: "$5.99", 
-        description: "Jasmine rice cooked in coconut milk",
-        image: "/photos/Sides/coconut-rice.jpg"
-      },
-      { 
-        name: "Coleslaw", 
-        price: "$4.99", 
-        description: "Fresh cabbage slaw with tangy dressing",
-        image: "/photos/Sides/coleslaw.jpg"
-      },
-      { 
-        name: "Sweet Potato Fries", 
-        price: "$6.99", 
-        description: "Hand-cut fries with sea salt",
-        image: "/photos/Sides/sweet-potato-fries.jpg"
-      }
-    ],
-    kids: [
-      { 
-        name: "Fish Sticks & Fries", 
-        price: "$8.99", 
-        description: "Crispy fish sticks with seasoned fries and ketchup",
-        image: "/photos/Kid's Meals/fish-sticks-and-fries.jpg"
-      },
-      { 
-        name: "Mini Crab Cakes", 
-        price: "$9.99", 
-        description: "Two small crab cakes with mashed potatoes and green beans",
-        image: "/photos/Kid's Meals/mini-crab-cakes.jpg"
-      },
-      { 
-        name: "Popcorn Shrimp", 
-        price: "$7.99", 
-        description: "Bite-sized breaded shrimp with honey mustard",
-        image: "/photos/Kid's Meals/popcorn-shrimp.jpg"
-      },
-      { 
-        name: "Grilled Cheese & Tomato Soup", 
-        price: "$6.99", 
-        description: "Classic grilled cheese with creamy tomato soup",
-        image: "/photos/Kid's Meals/grilled-cheese-and-tomato-soup.jpg"
-      }
-    ],
-    desserts: [
-      { 
-        name: "Key Lime Pie", 
-        price: "$7.99", 
-        description: "Traditional Florida key lime pie with graham cracker crust",
-        image: "/photos/Desserts/key-lime-pie.jpg"
-      },
-      { 
-        name: "Bread Pudding", 
-        price: "$8.99", 
-        description: "New Orleans-style bread pudding with whiskey sauce",
-        image: "/photos/Desserts/bread-pudding.jpg"
-      },
-      { 
-        name: "Chocolate Lava Cake", 
-        price: "$9.99", 
-        description: "Warm chocolate cake with molten center and vanilla ice cream",
-        image: "/photos/Desserts/chocolate-lava-cake.jpg"
-      },
-      { 
-        name: "Coconut Panna Cotta", 
-        price: "$6.99", 
-        description: "Creamy coconut custard with tropical fruit compote",
-        image: "/photos/Desserts/coconut-panna-cotta.jpg"
-      }
-    ],
-    drinks: [
-      { 
-        name: "Hurricane", 
-        price: "$12.99", 
-        description: "Classic New Orleans cocktail with rum and passion fruit",
-        image: "/photos/Drinks/hurricane.jpg"
-      },
-      { 
-        name: "Craft Beer Selection", 
-        price: "$5.99-8.99", 
-        description: "Local and imported beers on tap and bottled",
-        image: "/photos/Drinks/craft-beer-selection.jpg"
-      },
-      { 
-        name: "Fresh Lemonade", 
-        price: "$3.99", 
-        description: "House-made lemonade with fresh lemons",
-        image: "/photos/Drinks/fresh-lemonade.jpg"
-      },
-      { 
-        name: "Coffee & Espresso", 
-        price: "$2.99-4.99", 
-        description: "Premium coffee drinks and specialty espresso",
-        image: "/photos/Drinks/coffee-and-espresso.jpg"
-      }
-    ]
-  };
+  // Show loading state while data is being fetched
+  if (!menuData) {
+    return (
+      <div className="menu-page">
+        <div className="menu-container">
+          <div className="menu-header">
+            <h1 className="menu-title">Loading Menu...</h1>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const handleDownload = () => {
     if (activeCategory === 'kids') {
@@ -249,25 +88,263 @@ const MenuPage = () => {
     return `
       <html>
         <head>
-          <title>Blue Anchor Seafood - Kids Menu</title>
-          <link rel="stylesheet" href="/src/pages/print-styles/kids-menu-print.css">
+          <title>Blue Anchor Seafood - Kids Coloring Menu</title>
+          <style>
+            @page {
+              size: letter landscape;
+              margin: 0.4in;
+            }
+            
+            body { 
+              font-family: 'Comic Sans MS', cursive, Arial, sans-serif; 
+              margin: 0; 
+              padding: 0;
+              background: white;
+              line-height: 1.2;
+              width: 100%;
+            }
+            
+            .coloring-page {
+              width: 100%;
+              min-height: 100vh;
+            }
+            
+            .header { 
+              text-align: center; 
+              margin-bottom: 15px;
+              padding: 8px;
+              border-bottom: 3px dashed #3b82f6;
+            }
+            
+            .logo { 
+              max-width: 60px; 
+              height: auto; 
+              margin-bottom: 8px; 
+            }
+            
+            h1 { 
+              color: #1e40af; 
+              text-align: center; 
+              margin: 0; 
+              font-size: 1.6rem;
+            }
+            
+            .kids-subtitle {
+              color: #f59e0b;
+              font-size: 1.1rem;
+              margin: 5px 0;
+              font-weight: bold;
+            }
+            
+            .main-content {
+              display: flex;
+              gap: 25px;
+              min-height: 450px;
+            }
+            
+            .coloring-section {
+              flex: 0 0 65%;
+              padding: 20px;
+              border: 4px solid #f59e0b;
+              background: #fffbf0;
+              border-radius: 15px;
+            }
+            
+            .coloring-title {
+              color: #dc2626;
+              font-size: 1.5rem;
+              text-align: center;
+              margin-bottom: 15px;
+              border: 2px solid #dc2626;
+              padding: 8px;
+              border-radius: 10px;
+              background: #fef2f2;
+            }
+            
+            .coloring-instructions {
+              text-align: center;
+              color: #059669;
+              font-size: 1.1rem;
+              font-weight: bold;
+              margin-bottom: 20px;
+              padding: 10px;
+              background: #f0fdf4;
+              border-radius: 8px;
+              border: 2px dotted #059669;
+            }
+            
+            .coloring-shapes {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 25px;
+              margin-top: 25px;
+              justify-items: center;
+            }
+            
+            .shape {
+              width: 110px;
+              height: 110px;
+              border: 4px solid #374151;
+              background: white;
+            }
+            
+            .shape.circle {
+              border-radius: 50%;
+            }
+            
+            .shape.star {
+              position: relative;
+              border: none;
+              background: transparent;
+              display: inline-block;
+            }
+            
+            .shape.star:before {
+              content: '★';
+              font-size: 100px;
+              color: #374151;
+              border: 4px solid #374151;
+              display: inline-block;
+              width: 106px;
+              height: 106px;
+              text-align: center;
+              line-height: 98px;
+              background: white;
+            }
+            
+            .menu-section {
+              flex: 0 0 30%;
+              padding: 15px;
+              border: 4px solid #f59e0b;
+              background: #fef9e7;
+              border-radius: 15px;
+            }
+            
+            .menu-section h2 {
+              color: #dc2626;
+              font-size: 1.3rem;
+              text-align: center;
+              margin-bottom: 15px;
+              border-bottom: 2px solid #f59e0b;
+              padding-bottom: 5px;
+            }
+            
+            .menu-item {
+              margin: 10px 0;
+              padding: 8px;
+              border: 2px dotted #3b82f6;
+              border-radius: 8px;
+              background: #f8fafc;
+            }
+            
+            .item-name {
+              font-weight: bold;
+              color: #1e40af;
+              font-size: 1rem;
+              display: block;
+            }
+            
+            .item-price {
+              color: #dc2626;
+              font-weight: bold;
+              float: right;
+              font-size: 1rem;
+            }
+            
+            .item-description {
+              color: #059669;
+              font-size: 0.9rem;
+              margin-top: 5px;
+              clear: both;
+            }
+            
+            .footer { 
+              text-align: center; 
+              margin-top: 20px; 
+              color: #666; 
+              font-style: italic;
+              font-size: 0.9rem;
+              padding: 15px;
+              background: #f0f9ff;
+              border: 3px dashed #3b82f6;
+              border-radius: 8px;
+              clear: both;
+            }
+            
+            .fun-message {
+              color: #dc2626;
+              font-weight: bold;
+              font-size: 1rem;
+              margin-bottom: 5px;
+            }
+            
+            @media print {
+              body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+              }
+              
+              .main-content {
+                display: flex !important;
+                page-break-inside: avoid;
+              }
+              
+              .coloring-section {
+                border: 4px solid #f59e0b !important;
+                background: #fffbf0 !important;
+              }
+              
+              .menu-section {
+                border: 4px solid #f59e0b !important;
+                background: #fef9e7 !important;
+              }
+              
+              .shape {
+                border: 4px solid #374151 !important;
+              }
+            }
+          </style>
         </head>
         <body>
-          <div class="header">
-            <img src="D:/Program Files/Github Repositories/cajunrestaurant/public/photos/logo/kids_logo.png" alt="Blue Anchor Seafood Kids" class="logo">
-            <h1>Blue Anchor Seafood - Kids Menu</h1>
-          </div>
-          <h2>🧒 Kid's Meals</h2>
-          ${menuData.kids.map(item => `
-            <div class="menu-item">
-              <span class="item-name">${item.name}</span>
-              <span class="item-price">${item.price}</span>
-              <div class="item-description">${item.description}</div>
+          <div class="coloring-page">
+            <div class="header">
+              <h1>Blue Anchor Seafood</h1>
+              <div class="kids-subtitle">🎨 Kids Coloring Menu 🎨</div>
             </div>
-          `).join('')}
-          <div class="footer">
-            All kids meals include a drink and choice of side<br>
-            <strong>Blue Anchor Seafood</strong> • Fresh coastal cuisine for the whole family
+            
+            <div class="main-content">
+              <div class="coloring-section">
+                <div class="coloring-title">🖍️ Color Me! 🖍️</div>
+                <div class="coloring-instructions">
+                  Use your favorite colors to make these shapes beautiful!
+                </div>
+                <div class="coloring-shapes">
+                  <div class="shape circle"></div>
+                  <div class="shape"></div>
+                  <div class="shape star"></div>
+                  <div class="shape circle"></div>
+                  <div class="shape"></div>
+                  <div class="shape star"></div>
+                </div>
+              </div>
+              
+              <div class="menu-section">
+                <h2>🧒 Kid's Meals</h2>
+                ${menuData.menuItems.kids?.filter(item => item.active).map(item => `
+                  <div class="menu-item">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-price">$${item.price}</span>
+                    <div class="item-description">${item.description}</div>
+                  </div>
+                `).join('') || ''}
+              </div>
+            </div>
+            
+            <div class="footer">
+              <div class="fun-message">🌟 Have fun coloring and enjoy your meal! 🌟</div>
+              All kids meals include a drink and choice of side<br>
+              <strong>Blue Anchor Seafood</strong> • Fresh coastal cuisine for the whole family
+            </div>
           </div>
         </body>
       </html>
@@ -290,13 +367,13 @@ const MenuPage = () => {
         ${categoriesForFullMenu.map(category => `
         <div class="category-section">
           <h2>${category.icon} ${category.label}</h2>
-          ${menuData[category.id].map(item => `
+          ${menuData.menuItems[category.id]?.filter(item => item.active).map(item => `
           <div class="menu-item">
             <span class="item-name">${item.name}</span>
-            <span class="item-price">${item.price}</span>
+            <span class="item-price">$${item.price}</span>
             <div class="item-description">${item.description}</div>
           </div>
-          `).join('')}
+          `).join('') || ''}
         </div>
         `).join('')}
         <div class="footer">
@@ -343,8 +420,8 @@ const MenuPage = () => {
         {/* Menu Content */}
         <div className="menu-content">
           <div className="menu-grid">
-            {menuData[activeCategory]?.map((item, index) => (
-              <div key={index} className="menu-item-card">
+            {menuData.menuItems[activeCategory]?.filter(item => item.active).map((item, index) => (
+              <div key={item.id || index} className="menu-item-card">
                 <div className="item-image-container">
                   <img 
                     src={item.image} 
@@ -352,14 +429,14 @@ const MenuPage = () => {
                     className="item-image"
                     loading="lazy"
                   />
-                  <div className="price-badge">{item.price}</div>
+                  <div className="price-badge">${item.price}</div>
                 </div>
                 <div className="item-content">
                   <h3 className="item-name">{item.name}</h3>
                   <p className="item-description">{item.description}</p>
                 </div>
               </div>
-            ))}
+            )) || []}
           </div>
         </div>
 

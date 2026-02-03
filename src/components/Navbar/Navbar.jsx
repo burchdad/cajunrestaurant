@@ -19,6 +19,7 @@ const Navbar = () => {
               <Link to="/" className={`navbar-link ${location.pathname === '/' ? 'active' : ''}`}>Home</Link>
               <Link to="/menu" className={`navbar-link ${location.pathname === '/menu' ? 'active' : ''}`}>Menu</Link>
               <Link to="/about" className={`navbar-link ${location.pathname === '/about' ? 'active' : ''}`}>About</Link>
+              <Link to="/careers" className={`navbar-link ${location.pathname === '/careers' ? 'active' : ''}`}>Careers</Link>
             </div>
 
             {/* Logo Center */}
@@ -35,9 +36,10 @@ const Navbar = () => {
             {/* Right Navigation */}
             <div className="navbar-section navbar-right">
               <Link to="/order" className={`navbar-link ${location.pathname === '/order' ? 'active' : ''}`}>Order</Link>
-              <Link to="/reservations" className={`navbar-link ${location.pathname === '/reservations' ? 'active' : ''}`}>Events</Link>
+              <Link to="/reservations" className={`navbar-link ${location.pathname === '/reservations' ? 'active' : ''}`}>Reservations</Link>
               <Link to="/contact" className={`navbar-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
-              <Link to="/order">
+              <Link to="/login" className={`navbar-link ${location.pathname === '/login' ? 'active' : ''}`}>Login</Link>
+              <Link to="/dine-in">
                 <Button size="sm" className="order-button navbar-order-btn">Order Now</Button>
               </Link>
             </div>
@@ -60,10 +62,10 @@ const Navbar = () => {
       <div className={`mobile-overlay-menu ${isOpen ? 'overlay-visible' : 'overlay-hidden'}`}>
         <div className="mobile-overlay-content">
           <div className="mobile-nav-container">
-            {[ "/", "/menu", "/order", "/reservations", "/about", "/contact" ].map((path, i) => {
-              const labels = ["Home", "Menu", "Order", "Reserve", "About", "Contact"];
-              const icons = ["🏠", "🍽️", "🛒", "📅", "👥", "📞"];
-              const desc = ["Welcome Page", "Our Dishes", "Order Online", "Book Table", "Our Story", "Get in Touch"];
+            {[ "/", "/menu", "/about", "/careers", "/order", "/reservations", "/contact" ].map((path, i) => {
+              const labels = ["Home", "Menu", "About", "Careers", "Order", "Reserve", "Contact"];
+              const icons = ["🏠", "🍽️", "👥", "💼", "🛒", "📅", "📞"];
+              const desc = ["Welcome Page", "Our Dishes", "Our Story", "Join Our Team", "Order Online", "Book Table", "Get in Touch"];
               return (
                 <Link 
                   to={path} 
@@ -82,7 +84,7 @@ const Navbar = () => {
 
             <div className="mobile-nav-divider">
               <div className="mobile-nav-buttons">
-                <Link to="/order" onClick={() => setIsOpen(false)}>
+                <Link to="/dine-in" onClick={() => setIsOpen(false)}>
                   <Button variant="gold" size="lg" className="mobile-nav-button mobile-order-btn">
                     Order Now
                   </Button>
@@ -90,6 +92,11 @@ const Navbar = () => {
                 <Link to="/reservations" onClick={() => setIsOpen(false)}>
                   <Button variant="glass" size="lg" className="mobile-nav-button mobile-event-btn">
                     Book Event
+                  </Button>
+                </Link>
+                <Link to="/login" onClick={() => setIsOpen(false)}>
+                  <Button variant="ghost" size="lg" className="mobile-nav-button mobile-login-btn">
+                    Login
                   </Button>
                 </Link>
               </div>
