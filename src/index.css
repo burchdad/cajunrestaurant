@@ -1,6 +1,8 @@
 /* Import Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap");
 
+/* Updated: Trigger Vercel deployment */
+
 /* ----------- Global Base Styles ----------- */
 :root {
   --primary-blue: #1e40af;
