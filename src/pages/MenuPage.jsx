@@ -250,18 +250,7 @@ const MenuPage = () => {
       <html>
         <head>
           <title>Blue Anchor Seafood - Kids Menu</title>
-          <style>
-            body { font-family: Arial, sans-serif; margin: 20px; background: #f8fafc; }
-            .header { text-align: center; margin-bottom: 30px; }
-            .logo { max-width: 150px; height: auto; margin-bottom: 20px; }
-            h1 { color: #1e40af; text-align: center; margin: 0; font-size: 2.5rem; }
-            h2 { color: #3b82f6; border-bottom: 2px solid #3b82f6; padding-bottom: 10px; }
-            .menu-item { margin-bottom: 15px; padding: 10px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-            .item-name { font-weight: bold; font-size: 1.1rem; }
-            .item-price { color: #dc2626; font-weight: bold; float: right; }
-            .item-description { font-style: italic; color: #666; margin-top: 5px; }
-            .footer { text-align: center; margin-top: 30px; color: #666; font-style: italic; }
-          </style>
+          <link rel="stylesheet" href="/src/pages/print-styles/kids-menu-print.css">
         </head>
         <body>
           <div class="header">
@@ -291,19 +280,7 @@ const MenuPage = () => {
       <html>
       <head>
         <title>Blue Anchor Seafood - Full Menu</title>
-        <style>
-        body { font-family: Arial, sans-serif; margin: 20px; background: #f8fafc; }
-        .header { text-align: center; margin-bottom: 40px; }
-        .logo { max-width: 200px; height: auto; margin-bottom: 20px; }
-        h1 { color: #1e40af; text-align: center; margin: 0; font-size: 3rem; }
-        h2 { color: #3b82f6; border-bottom: 2px solid #3b82f6; margin-top: 35px; padding-bottom: 10px; font-size: 1.8rem; }
-        .menu-item { margin-bottom: 15px; padding: 12px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .item-name { font-weight: bold; font-size: 1.1rem; }
-        .item-price { color: #dc2626; font-weight: bold; float: right; font-size: 1.1rem; }
-        .item-description { font-style: italic; color: #666; margin-top: 5px; }
-        .footer { text-align: center; margin-top: 40px; color: #666; font-style: italic; border-top: 2px solid #3b82f6; padding-top: 20px; }
-        .category-section { margin-bottom: 30px; }
-        </style>
+        <link rel="stylesheet" href="/src/pages/print-styles/full-menu-print.css">
       </head>
       <body>
         <div class="header">
@@ -333,12 +310,12 @@ const MenuPage = () => {
 
   return (
     <div className="menu-page">
-      <div className="container mx-auto px-6 py-8">
+      <div className="menu-container">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="menu-header">
           <h1 className="menu-title">Our Menu</h1>
           <p className="menu-subtitle">Fresh seafood prepared with coastal culinary traditions</p>
-          <div className="button-container">
+          <div className="menu-buttons">
             <Button onClick={handleDownload} className="download-button">
               Download Menu
             </Button>
@@ -390,7 +367,7 @@ const MenuPage = () => {
         {activeCategory !== 'kids' && (
           <div className="chefs-note">
             <Card className="chef-note-card">
-              <CardContent className="p-8">
+              <CardContent className="chef-note-content">
                 <h3 className="chef-note-title">🦈 Captain's Note</h3>
                 <p className="chef-note-text">
                   All our seafood is sourced fresh daily from local fishing fleets and sustainable suppliers. 

@@ -27,6 +27,13 @@
 .story-content {
   max-width: 56rem;
   margin: 0 auto;
+  text-align: center;
+}
+
+.section-paragraph {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
 }
 
 /* Brand Colors */
@@ -70,7 +77,7 @@
   transform: translate(-50%, -50%);
   z-index: 2;
   color: #fff;
-  text-align: center !important;
+  text-align: center;
   width: 100%;
   padding: 0 1rem;
 }
@@ -187,22 +194,22 @@
 }
 
 .section-header {
-  text-align: center !important;
+  text-align: center;
   margin-bottom: 3rem;
 }
 
 .featured-section .page-container {
-  text-align: center !important;
+  text-align: center;
 }
 
-.featured-section .section-title {
-  text-align: center !important;
-  display: block !important;
-  width: 100% !important;
+.featured-section .page-container .section-title {
+  text-align: center;
+  display: block;
+  width: 100%;
 }
 
 .featured-section .section-subtitle {
-  text-align: center !important;
+  text-align: center;
 }
 
 .section-title {
@@ -213,6 +220,9 @@
   display: block;
   color: #1f2937;
   text-align: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-title::after {
@@ -237,15 +247,54 @@
 
 .about-preview {
   background: 
-    linear-gradient(135deg, #1e40af 0%, #3b82f6 100%),
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150"><defs><pattern id="ocean" width="75" height="75" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><path d="M50 30c-5-5-5-15 0-20s15-5 20 0 5 15 0 20-15 5-20 0" fill="rgba(34,197,94,0.12)" stroke="rgba(34,197,94,0.15)" stroke-width="0.5"/><ellipse cx="60" cy="55" rx="8" ry="4" fill="rgba(59,130,246,0.08)"/><path d="M10 60l8-8 8 8-8 8z" fill="rgba(251,146,60,0.1)"/></pattern></defs><rect width="150" height="150" fill="url(%23ocean)"/></svg>') repeat;
+    linear-gradient(135deg, #0c4a6e 0%, #0e7490 25%, #0891b2 50%, #06b6d4 75%, #67e8f9 100%),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="ocean-waves" width="100" height="50" patternUnits="userSpaceOnUse"><path d="M0 25c15-8 25 8 50 0s35-8 50 0v25H0z" fill="rgba(255,255,255,0.08)"/><path d="M0 35c20-5 30 5 50 0s30-5 50 0v15H0z" fill="rgba(255,255,255,0.05)"/><circle cx="25" cy="15" r="1.5" fill="rgba(255,255,255,0.12)"/><circle cx="75" cy="20" r="1" fill="rgba(255,255,255,0.08)"/><path d="M40 10c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3m20 15c-1.5 0-2.5 1-2.5 2.5s1 2.5 2.5 2.5 2.5-1 2.5-2.5-1-2.5-2.5-2.5" fill="rgba(34,211,238,0.15)"/></pattern></defs><rect width="200" height="200" fill="url(%23ocean-waves)"/></svg>') repeat;
   padding: 4rem 2rem;
   text-align: center;
   color: white;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
   margin-top: -40px;
   position: relative;
   overflow: hidden;
+}
+
+.about-preview .page-container {
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.about-preview .page-container .section-title {
+  text-align: center;
+  color: white;
+  margin: 0 auto 2.5rem auto;
+  width: 100%;
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.about-preview .story-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-preview .story-content .section-paragraph {
+  text-align: center;
+}
+
+.about-preview .story-content a {
+  display: block;
+  margin: 2rem auto 0;
+  text-align: center;
+}
+
+.about-preview .story-content .btn-primary {
+  margin: 0 auto;
+  display: block;
 }
 
 .about-preview::before {
@@ -319,6 +368,13 @@
 .services-header {
   text-align: center;
   margin-bottom: 3rem;
+}
+
+.services-header .section-title {
+  text-align: center;
+  margin: 0 auto 1rem auto;
+  width: 100%;
+  display: block;
 }
 
 .services-grid {
@@ -435,10 +491,16 @@
   margin-bottom: 3rem;
 }
 
-.testimonials-header .section-title {
+.testimonials-section .testimonials-container .testimonials-header .section-title {
   color: white;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem auto;
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;

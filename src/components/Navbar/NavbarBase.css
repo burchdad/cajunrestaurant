@@ -21,11 +21,12 @@
 
 /* Logo Styles - Shared across all devices */
 .navbar-logo {
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.025em;
+  height: 6.5rem;
+  width: auto;
   cursor: pointer;
   transition: transform 0.3s;
+  object-fit: contain;
+  max-width: 160px;
 }
 
 .navbar-logo:hover {
@@ -108,4 +109,145 @@
 .order-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Enhanced Navbar Logo - Remove duplicate */
+/* Logo styles are defined above */
+
+/* Order Button Enhancement */
+.navbar-order-btn {
+  margin-left: 0.5rem;
+}
+
+/* Mobile Hamburger Animations */
+.line-rotate-45 {
+  transform: rotate(45deg) translateY(0.375rem);
+}
+
+.line-hidden {
+  opacity: 0;
+}
+
+.line-rotate-neg45 {
+  transform: rotate(-45deg) translateY(-0.375rem);
+}
+
+/* Mobile Overlay States */
+.overlay-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overlay-hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* Mobile Nav Item Content */
+.nav-item-content {
+  text-align: center;
+}
+
+.nav-item-icon {
+  font-size: 1.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.mobile-nav-item:hover .nav-item-icon {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+.nav-item-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+}
+
+.mobile-nav-item:hover .nav-item-title {
+  color: #a5f3fc;
+}
+
+.nav-item-description {
+  font-size: 0.875rem;
+  color: #d1d5db;
+  margin-top: 0.25rem;
+}
+
+/* Mobile Nav Dividers and Buttons */
+.mobile-nav-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+}
+
+.mobile-nav-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .mobile-nav-buttons {
+    flex-direction: row;
+  }
+}
+
+.mobile-nav-button {
+  width: 100%;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .mobile-nav-button {
+    width: auto;
+  }
+}
+
+/* Mobile Nav Footer */
+.mobile-nav-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #d1d5db;
+}
+
+.footer-address {
+  margin-bottom: 0.5rem;
+}
+
+.footer-hours {
+  margin: 0;
+}
+
+/* Mobile Backdrop */
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 30;
+  top: 5rem;
+}
+
+@media (min-width: 1024px) {
+  .mobile-backdrop {
+    display: none;
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 53%, 80%, 100% {
+    transform: translate3d(0,0,0);
+  }
+  40%, 43% {
+    transform: translate3d(0, -30px, 0);
+  }
+  70% {
+    transform: translate3d(0, -15px, 0);
+  }
+  90% {
+    transform: translate3d(0, -4px, 0);
+  }
 }

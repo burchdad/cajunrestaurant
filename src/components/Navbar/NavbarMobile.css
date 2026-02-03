@@ -99,7 +99,8 @@
 
   /* Mobile logo adjustments */
   .navbar-logo {
-    font-size: 1rem;
+    height: 2.75rem;
+    max-width: 130px;
   }
 
   .logo-home-button {

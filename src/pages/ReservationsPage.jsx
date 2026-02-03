@@ -37,17 +37,17 @@ const ReservationsPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-6xl mx-auto p-6 pt-24">
-        <h1 className="text-4xl font-bold text-center mb-8">Make a Reservation</h1>
+    <div className="reservations-page">
+      <div className="reservations-container">
+        <h1 className="reservations-title">Make a Reservation</h1>
         
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="reservations-grid">
           {/* Reservation Form */}
-          <Card className="p-6">
-            <h2 className="text-2xl font-bold mb-6">Book Your Table</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <Card className="reservation-form-card">
+            <h2 className="form-title">Book Your Table</h2>
+            <form onSubmit={handleSubmit} className="reservation-form">
+              <div className="form-group">
+                <label htmlFor="name" className="form-label">
                   Full Name *
                 </label>
                 <input
@@ -57,12 +57,12 @@ const ReservationsPage = () => {
                   value={formData.name}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="form-input"
                 />
               </div>
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">
                   Email Address *
                 </label>
                 <input
@@ -72,12 +72,12 @@ const ReservationsPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="form-input"
                 />
               </div>
               
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="form-group">
+                <label htmlFor="phone" className="form-label">
                   Phone Number *
                 </label>
                 <input
@@ -87,13 +87,13 @@ const ReservationsPage = () => {
                   value={formData.phone}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="form-input"
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="form-grid form-grid-cols-2">
+                <div className="form-group">
+                  <label htmlFor="date" className="form-label">
                     Date *
                   </label>
                   <input
@@ -103,12 +103,12 @@ const ReservationsPage = () => {
                     value={formData.date}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="form-input"
                   />
                 </div>
                 
-                <div>
-                  <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">
+                <div className="form-group">
+                  <label htmlFor="time" className="form-label">
                     Time *
                   </label>
                   <select
@@ -117,7 +117,7 @@ const ReservationsPage = () => {
                     value={formData.time}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="form-input"
                   >
                     <option value="">Select Time</option>
                     <option value="5:00 PM">5:00 PM</option>
@@ -133,8 +133,8 @@ const ReservationsPage = () => {
                 </div>
               </div>
               
-              <div>
-                <label htmlFor="guests" className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="form-group">
+                <label htmlFor="guests" className="form-label">
                   Number of Guests *
                 </label>
                 <select
@@ -143,7 +143,7 @@ const ReservationsPage = () => {
                   value={formData.guests}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="form-input"
                 >
                   <option value="">Select Number of Guests</option>
                   <option value="1">1 Guest</option>
@@ -158,8 +158,8 @@ const ReservationsPage = () => {
                 </select>
               </div>
               
-              <div>
-                <label htmlFor="specialRequests" className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="form-group">
+                <label htmlFor="specialRequests" className="form-label">
                   Special Requests
                 </label>
                 <textarea
@@ -169,39 +169,39 @@ const ReservationsPage = () => {
                   onChange={handleInputChange}
                   rows={3}
                   placeholder="Special occasions, dietary restrictions, seating preferences..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="form-input"
                 />
               </div>
               
-              <Button type="submit" size="lg" className="w-full">
+              <Button type="submit" size="lg" className="submit-btn">
                 Submit Reservation Request
               </Button>
             </form>
           </Card>
           
           {/* Restaurant Information */}
-          <div className="space-y-6">
-            <Card className="p-6">
-              <h3 className="text-xl font-bold mb-4">Restaurant Hours</h3>
-              <div className="space-y-2">
-                <div className="flex justify-between">
+          <div className="info-section">
+            <Card className="info-card">
+              <h3 className="info-card-title">Restaurant Hours</h3>
+              <div className="hours-list">
+                <div className="hours-item">
                   <span>Monday - Thursday:</span>
                   <span>5:00 PM - 10:00 PM</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="hours-item">
                   <span>Friday - Saturday:</span>
                   <span>5:00 PM - 11:00 PM</span>
                 </div>
-                <div className="flex justify-between">
+                <div className="hours-item">
                   <span>Sunday:</span>
                   <span>4:00 PM - 9:00 PM</span>
                 </div>
               </div>
             </Card>
             
-            <Card className="p-6">
-              <h3 className="text-xl font-bold mb-4">Reservation Policy</h3>
-              <ul className="space-y-2 text-sm">
+            <Card className="info-card">
+              <h3 className="info-card-title">Reservation Policy</h3>
+              <ul className="policy-list">
                 <li>• Reservations are recommended for parties of 2 or more</li>
                 <li>• We hold reservations for 15 minutes past the reserved time</li>
                 <li>• For parties of 8 or more, please call us directly</li>
@@ -210,12 +210,12 @@ const ReservationsPage = () => {
               </ul>
             </Card>
             
-            <Card className="p-6">
-              <h3 className="text-xl font-bold mb-4">Contact Information</h3>
-              <div className="space-y-2">
-                <p><strong>Phone:</strong> (504) 555-0123</p>
-                <p><strong>Email:</strong> reservations@blueanchorseafood.com</p>
-                <p><strong>Address:</strong> 123 Bourbon Street, New Orleans, LA 70116</p>
+            <Card className="info-card">
+              <h3 className="info-card-title">Contact Information</h3>
+              <div className="contact-info">
+                <p className="contact-item"><strong>Phone:</strong> (504) 555-0123</p>
+                <p className="contact-item"><strong>Email:</strong> reservations@blueanchorseafood.com</p>
+                <p className="contact-item"><strong>Address:</strong> 123 Bourbon Street, New Orleans, LA 70116</p>
               </div>
             </Card>
           </div>

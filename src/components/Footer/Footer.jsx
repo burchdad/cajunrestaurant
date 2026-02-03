@@ -7,8 +7,8 @@ const Footer = () => {
     <footer className="global-footer">
       {/* Newsletter Section with Map */}
       <div className="newsletter-section relative">
-        <div className="max-w-4xl mx-auto px-6 py-8">
-          <div className="grid">
+        <div className="newsletter-container">
+          <div className="newsletter-grid">
             {/* Newsletter Content */}
             <div className="newsletter-content">
               <h2 className="newsletter-title">Newsletter</h2>
@@ -48,8 +48,8 @@ const Footer = () => {
       </div>
 
       {/* Main Footer Section */}
-      <div className="main-footer bg-blue-900 text-white py-12">
-        <div className="max-w-6xl mx-auto px-6">
+      <div className="main-footer">
+        <div className="main-footer-container">
           <div className="main-footer-grid">
             
             {/* Location */}
@@ -68,7 +68,7 @@ const Footer = () => {
               <div className="footer-column-content">
                 <p>Tuesday - Sunday</p>
                 <p>11:00 AM - 9:00 PM</p>
-                <p className="mt-4 font-semibold">No Reservations</p>
+                <p className="no-reservations-note">No Reservations</p>
               </div>
             </div>
 
@@ -99,9 +99,9 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="footer-bottom bg-gray-900 text-gray-400 py-4">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+      <div className="footer-bottom">
+        <div className="footer-bottom-container">
+          <div className="footer-bottom-content">
             <p className="copyright">
               © 2026 Blue Anchor Seafood. All rights reserved.
             </p>

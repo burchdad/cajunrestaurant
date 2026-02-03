@@ -350,18 +350,18 @@ const OrderOnlinePage = () => {
     switch (currentStep) {
       case 'menu':
         return (
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="order-grid">
             {/* Menu Items */}
-            <div className="lg:col-span-2">
-              <div className="flex flex-wrap gap-2 mb-6">
+            <div className="menu-section">
+              <div className="category-filters">
                 {categories.map(category => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    className={`category-button ${
                       selectedCategory === category
-                        ? 'bg-red-700 text-white'
-                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                        ? 'active'
+                        : 'inactive'
                     }`}
                   >
                     {category}
@@ -369,26 +369,26 @@ const OrderOnlinePage = () => {
                 ))}
               </div>
               
-              <div className="grid md:grid-cols-2 gap-4">
+              <div className="menu-items-grid">
                 {filteredMenuItems.map(item => (
-                  <Card key={item.id} className="overflow-hidden">
-                    <div className="aspect-w-16 aspect-h-9 bg-gray-200">
+                  <Card key={item.id} className="menu-item-card">
+                    <div className="menu-item-image-container">
                       <img 
                         src={item.image} 
                         alt={item.name}
-                        className="w-full h-48 object-cover"
+                        className="menu-item-image"
                         onError={(e) => {
                           e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5YTNhZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk5vIEltYWdlPC90ZXh0Pjwvc3ZnPg==';
                         }}
                       />
                     </div>
-                    <div className="p-4">
-                      <div className="flex justify-between items-start mb-2">
-                        <h3 className="text-lg font-semibold">{item.name}</h3>
-                        <span className="text-lg font-bold text-red-700">${item.price.toFixed(2)}</span>
+                    <div className="menu-item-content">
+                      <div className="menu-item-header">
+                        <h3 className="menu-item-title">{item.name}</h3>
+                        <span className="menu-item-price">${item.price.toFixed(2)}</span>
                       </div>
-                      <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                      <Button onClick={() => addToCart(item)} className="w-full">
+                      <p className="menu-item-description">{item.description}</p>
+                      <Button onClick={() => addToCart(item)} className="add-to-cart-button">
                         Add to Cart
                       </Button>
                     </div>
@@ -398,30 +398,30 @@ const OrderOnlinePage = () => {
             </div>
 
             {/* Cart Sidebar */}
-            <div className="lg:sticky lg:top-24 h-fit">
-              <Card className="p-6">
-                <h2 className="text-xl font-bold mb-4">Your Order</h2>
+            <div className="cart-sidebar">
+              <Card className="cart-card">
+                <h2 className="cart-title">Your Order</h2>
                 
                 {/* Order Type Selection */}
-                <div className="mb-6">
-                  <h3 className="font-semibold mb-2">Order Type</h3>
-                  <div className="flex gap-2">
+                <div className="order-type-section">
+                  <h3 className="order-type-label">Order Type</h3>
+                  <div className="order-type-buttons">
                     <button
                       onClick={() => setOrderType('delivery')}
-                      className={`flex-1 py-2 px-3 rounded text-sm font-medium transition-colors ${
+                      className={`order-type-button ${
                         orderType === 'delivery'
-                          ? 'bg-red-700 text-white'
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          ? 'active'
+                          : 'inactive'
                       }`}
                     >
                       Delivery
                     </button>
                     <button
                       onClick={() => setOrderType('pickup')}
-                      className={`flex-1 py-2 px-3 rounded text-sm font-medium transition-colors ${
+                      className={`order-type-button ${
                         orderType === 'pickup'
-                          ? 'bg-red-700 text-white'
-                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                          ? 'active'
+                          : 'inactive'
                       }`}
                     >
                       Pickup
@@ -430,35 +430,35 @@ const OrderOnlinePage = () => {
                 </div>
 
                 {cart.length === 0 ? (
-                  <p className="text-gray-600 text-center py-8">Your cart is empty</p>
+                  <p className="empty-cart">Your cart is empty</p>
                 ) : (
                   <div>
-                    <div className="space-y-3 mb-4">
+                    <div className="cart-items-list">
                       {cart.map(item => (
-                        <div key={item.id} className="flex justify-between items-center py-2">
-                          <div className="flex-1">
-                            <h4 className="font-medium text-sm">{item.name}</h4>
-                            <div className="flex items-center gap-2 mt-1">
+                        <div key={item.id} className="cart-item">
+                          <div className="cart-item-details">
+                            <h4 className="cart-item-name">{item.name}</h4>
+                            <div className="cart-item-controls">
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                                className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-sm"
+                                className="quantity-button"
                               >
                                 -
                               </button>
-                              <span className="text-sm">{item.quantity}</span>
+                              <span className="quantity-display">{item.quantity}</span>
                               <button
                                 onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                                className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-sm"
+                                className="quantity-button"
                               >
                                 +
                               </button>
                             </div>
                           </div>
-                          <div className="text-right">
-                            <div className="font-medium text-sm">${(item.price * item.quantity).toFixed(2)}</div>
+                          <div className="cart-item-price">
+                            <div className="cart-item-amount">${(item.price * item.quantity).toFixed(2)}</div>
                             <button
                               onClick={() => removeFromCart(item.id)}
-                              className="text-red-600 text-xs hover:underline"
+                              className="remove-item-button"
                             >
                               Remove
                             </button>
@@ -467,22 +467,22 @@ const OrderOnlinePage = () => {
                       ))}
                     </div>
                     
-                    <div className="border-t pt-3 space-y-2">
-                      <div className="flex justify-between text-sm">
+                    <div className="cart-totals">
+                      <div className="total-row">
                         <span>Subtotal:</span>
                         <span>${getCartSubtotal().toFixed(2)}</span>
                       </div>
-                      <div className="flex justify-between text-sm">
+                      <div className="total-row">
                         <span>Tax (8%):</span>
                         <span>${getTaxAmount().toFixed(2)}</span>
                       </div>
                       {orderType === 'delivery' && (
-                        <div className="flex justify-between text-sm">
+                        <div className="total-row">
                           <span>Delivery Fee:</span>
                           <span>${getDeliveryFee().toFixed(2)}</span>
                         </div>
                       )}
-                      <div className="flex justify-between font-bold text-lg border-t pt-2">
+                      <div className="total-final">
                         <span>Total:</span>
                         <span>${getTotal().toFixed(2)}</span>
                       </div>
@@ -490,7 +490,7 @@ const OrderOnlinePage = () => {
                     
                     <Button 
                       onClick={() => setCurrentStep('details')} 
-                      className="w-full mt-4"
+                      className="checkout-button"
                       size="lg"
                     >
                       Proceed to Checkout
@@ -504,86 +504,86 @@ const OrderOnlinePage = () => {
 
       case 'details':
         return (
-          <div className="max-w-2xl mx-auto">
-            <Card className="p-6">
-              <h2 className="text-2xl font-bold mb-6">Customer Information</h2>
+          <div className="customer-details-container">
+            <Card className="customer-details-card">
+              <h2 className="customer-details-title">Customer Information</h2>
               
-              <div className="grid md:grid-cols-2 gap-4 mb-6">
-                <div>
-                  <label className="block text-sm font-medium mb-1">First Name *</label>
+              <div className="customer-form-grid">
+                <div className="form-field">
+                  <label className="form-label">First Name *</label>
                   <input
                     type="text"
                     value={customerInfo.firstName}
                     onChange={(e) => handleCustomerInfoChange('firstName', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                    className="form-input"
                     required
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Last Name *</label>
+                <div className="form-field">
+                  <label className="form-label">Last Name *</label>
                   <input
                     type="text"
                     value={customerInfo.lastName}
                     onChange={(e) => handleCustomerInfoChange('lastName', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                    className="form-input"
                     required
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Email *</label>
+                <div className="form-field">
+                  <label className="form-label">Email *</label>
                   <input
                     type="email"
                     value={customerInfo.email}
                     onChange={(e) => handleCustomerInfoChange('email', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                    className="form-input"
                     required
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Phone *</label>
+                <div className="form-field">
+                  <label className="form-label">Phone *</label>
                   <input
                     type="tel"
                     value={customerInfo.phone}
                     onChange={(e) => handleCustomerInfoChange('phone', e.target.value)}
-                    className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                    className="form-input"
                     required
                   />
                 </div>
               </div>
 
               {orderType === 'delivery' && (
-                <div className="mb-6">
-                  <h3 className="font-semibold mb-3">Delivery Address</h3>
-                  <div className="space-y-4">
+                <div className="delivery-address-section">
+                  <h3 className="delivery-address-title">Delivery Address</h3>
+                  <div className="delivery-address-fields">
                     <div>
-                      <label className="block text-sm font-medium mb-1">Address *</label>
+                      <label className="form-label">Address *</label>
                       <input
                         type="text"
                         value={customerInfo.address}
                         onChange={(e) => handleCustomerInfoChange('address', e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                        className="form-input"
                         placeholder="Street address"
                         required
                       />
                     </div>
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="delivery-address-row">
                       <div>
-                        <label className="block text-sm font-medium mb-1">City *</label>
+                        <label className="form-label">City *</label>
                         <input
                           type="text"
                           value={customerInfo.city}
                           onChange={(e) => handleCustomerInfoChange('city', e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                          className="form-input"
                           required
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">ZIP Code *</label>
+                        <label className="form-label">ZIP Code *</label>
                         <input
                           type="text"
                           value={customerInfo.zipCode}
                           onChange={(e) => handleCustomerInfoChange('zipCode', e.target.value)}
-                          className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                          className="form-input"
                           required
                         />
                       </div>
@@ -592,28 +592,28 @@ const OrderOnlinePage = () => {
                 </div>
               )}
 
-              <div className="mb-6">
-                <label className="block text-sm font-medium mb-1">Special Instructions</label>
+              <div className="form-field">
+                <label className="form-label">Special Instructions</label>
                 <textarea
                   value={customerInfo.specialInstructions}
                   onChange={(e) => handleCustomerInfoChange('specialInstructions', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                  className="form-input"
                   rows="3"
                   placeholder="Any special requests or dietary restrictions?"
                 />
               </div>
 
-              <div className="flex gap-3">
+              <div className="confirmation-buttons">
                 <Button 
                   onClick={() => setCurrentStep('menu')} 
                   variant="outline"
-                  className="flex-1"
+                  className="button-half"
                 >
                   Back to Menu
                 </Button>
                 <Button 
                   onClick={() => setCurrentStep('payment')} 
-                  className="flex-1"
+                  className="button-half"
                   disabled={!validateCustomerInfo()}
                 >
                   Continue to Payment
@@ -625,25 +625,25 @@ const OrderOnlinePage = () => {
 
       case 'payment':
         return (
-          <div className="max-w-2xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-6">
+          <div className="payment-container">
+            <div className="payment-form-grid gap-6">
               {/* Payment Form */}
-              <Card className="p-6">
-                <h2 className="text-2xl font-bold mb-6">Payment Information</h2>
+              <Card className="payment-form-card">
+                <h2 className="payment-form-title">Payment Information</h2>
                 
-                <div className="space-y-4">
+                <div className="payment-form-fields">
                   <div>
-                    <label className="block text-sm font-medium mb-1">Name on Card *</label>
+                    <label className="form-label">Name on Card *</label>
                     <input
                       type="text"
                       value={paymentInfo.nameOnCard}
                       onChange={(e) => handlePaymentInfoChange('nameOnCard', e.target.value)}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                      className="form-input"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1">Card Number *</label>
+                    <label className="form-label">Card Number *</label>
                     <input
                       type="text"
                       value={paymentInfo.cardNumber}
@@ -651,14 +651,14 @@ const OrderOnlinePage = () => {
                         const value = e.target.value.replace(/\D/g, '').slice(0, 16);
                         handlePaymentInfoChange('cardNumber', value);
                       }}
-                      className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                      className="form-input"
                       placeholder="1234 5678 9012 3456"
                       required
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid-2">
                     <div>
-                      <label className="block text-sm font-medium mb-1">Expiry Date *</label>
+                      <label className="form-label">Expiry Date *</label>
                       <input
                         type="text"
                         value={paymentInfo.expiryDate}
@@ -669,14 +669,14 @@ const OrderOnlinePage = () => {
                           }
                           handlePaymentInfoChange('expiryDate', value);
                         }}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                        className="form-input"
                         placeholder="MM/YY"
                         maxLength="5"
                         required
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">CVV *</label>
+                      <label className="form-label">CVV *</label>
                       <input
                         type="text"
                         value={paymentInfo.cvv}
@@ -684,7 +684,7 @@ const OrderOnlinePage = () => {
                           const value = e.target.value.replace(/\D/g, '').slice(0, 4);
                           handlePaymentInfoChange('cvv', value);
                         }}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2"
+                        className="form-input"
                         placeholder="123"
                         required
                       />
@@ -692,17 +692,17 @@ const OrderOnlinePage = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-3 mt-6">
+                <div className="confirmation-buttons">
                   <Button 
                     onClick={() => setCurrentStep('details')} 
                     variant="outline"
-                    className="flex-1"
+                    className="button-half"
                   >
                     Back
                   </Button>
                   <Button 
                     onClick={processOrder} 
-                    className="flex-1"
+                    className="button-half"
                     disabled={!validatePaymentInfo() || isProcessing}
                   >
                     {isProcessing ? 'Processing...' : `Place Order - $${getTotal().toFixed(2)}`}
@@ -711,55 +711,55 @@ const OrderOnlinePage = () => {
               </Card>
 
               {/* Order Summary */}
-              <Card className="p-6">
-                <h3 className="text-xl font-bold mb-4">Order Summary</h3>
+              <Card className="order-summary-card">
+                <h3 className="order-summary-header">Order Summary</h3>
                 
-                <div className="space-y-3 mb-4">
+                <div className="order-summary-items">
                   {cart.map(item => (
-                    <div key={item.id} className="flex justify-between items-center">
+                    <div key={item.id} className="order-summary-item">
                       <div>
-                        <span className="font-medium">{item.name}</span>
-                        <span className="text-gray-600 ml-2">x{item.quantity}</span>
+                        <span className="order-summary-item-name">{item.name}</span>
+                        <span className="order-summary-item-quantity">x{item.quantity}</span>
                       </div>
                       <span>${(item.price * item.quantity).toFixed(2)}</span>
                     </div>
                   ))}
                 </div>
                 
-                <div className="border-t pt-4 space-y-2">
-                  <div className="flex justify-between">
+                <div className="order-summary-totals">
+                  <div className="order-summary-row">
                     <span>Subtotal:</span>
                     <span>${getCartSubtotal().toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="order-summary-row">
                     <span>Tax:</span>
                     <span>${getTaxAmount().toFixed(2)}</span>
                   </div>
                   {orderType === 'delivery' && (
-                    <div className="flex justify-between">
-                      <span>Delivery:</span>
+                    <div className="order-summary-row">
+                      <span>Delivery Fee:</span>
                       <span>${getDeliveryFee().toFixed(2)}</span>
                     </div>
                   )}
-                  <div className="flex justify-between font-bold text-lg border-t pt-2">
+                  <div className="total-final">
                     <span>Total:</span>
                     <span>${getTotal().toFixed(2)}</span>
                   </div>
                 </div>
 
-                <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-                  <h4 className="font-medium mb-2">
+                <div className="order-summary-info">
+                  <h4 className="order-summary-info-title">
                     {orderType === 'delivery' ? 'Delivery' : 'Pickup'} Information:
                   </h4>
-                  <p className="text-sm text-gray-600">
+                  <p className="order-summary-info-item">
                     {customerInfo.firstName} {customerInfo.lastName}
                   </p>
                   {orderType === 'delivery' && (
-                    <p className="text-sm text-gray-600">
+                    <p className="order-summary-info-item">
                       {customerInfo.address}, {customerInfo.city} {customerInfo.zipCode}
                     </p>
                   )}
-                  <p className="text-sm text-gray-600">
+                  <p className="order-summary-info-item">
                     Estimated time: {orderType === 'delivery' ? '45-60 minutes' : '20-30 minutes'}
                   </p>
                 </div>
@@ -770,28 +770,28 @@ const OrderOnlinePage = () => {
 
       case 'confirmation':
         return (
-          <div className="max-w-2xl mx-auto text-center">
-            <Card className="p-8">
-              <div className="text-green-600 text-6xl mb-4">✓</div>
-              <h2 className="text-3xl font-bold text-green-600 mb-4">Order Confirmed!</h2>
-              <p className="text-xl mb-6">Thank you for your order!</p>
+          <div className="confirmation-container">
+            <Card className="confirmation-card">
+              <div className="confirmation-success-icon">✓</div>
+              <h2 className="confirmation-title">Order Confirmed!</h2>
+              <p className="confirmation-subtitle">Thank you for your order!</p>
               
-              <div className="bg-gray-50 rounded-lg p-6 mb-6">
-                <h3 className="font-bold text-lg mb-2">Order Details</h3>
-                <p className="mb-2"><strong>Order Number:</strong> {orderNumber}</p>
-                <p className="mb-2"><strong>Customer:</strong> {customerInfo.firstName} {customerInfo.lastName}</p>
-                <p className="mb-2"><strong>Email:</strong> {customerInfo.email}</p>
-                <p className="mb-2"><strong>Phone:</strong> {customerInfo.phone}</p>
-                <p className="mb-2"><strong>Order Type:</strong> {orderType.charAt(0).toUpperCase() + orderType.slice(1)}</p>
-                <p className="mb-2">
+              <div className="confirmation-details">
+                <h3 className="confirmation-details-title">Order Details</h3>
+                <p className="confirmation-detail-item"><strong>Order Number:</strong> {orderNumber}</p>
+                <p className="confirmation-detail-item"><strong>Customer:</strong> {customerInfo.firstName} {customerInfo.lastName}</p>
+                <p className="confirmation-detail-item"><strong>Email:</strong> {customerInfo.email}</p>
+                <p className="confirmation-detail-item"><strong>Phone:</strong> {customerInfo.phone}</p>
+                <p className="confirmation-detail-item"><strong>Order Type:</strong> {orderType.charAt(0).toUpperCase() + orderType.slice(1)}</p>
+                <p className="confirmation-detail-item">
                   <strong>Estimated Time:</strong> {orderType === 'delivery' ? '45-60 minutes' : '20-30 minutes'}
                 </p>
-                <p className="mb-2"><strong>Total:</strong> ${getTotal().toFixed(2)}</p>
+                <p className="confirmation-detail-item"><strong>Total:</strong> ${getTotal().toFixed(2)}</p>
               </div>
 
-              <div className="text-left bg-blue-50 rounded-lg p-4 mb-6">
-                <h4 className="font-semibold mb-2">What's Next?</h4>
-                <ul className="text-sm space-y-1 text-gray-700">
+              <div className="confirmation-next-steps">
+                <h4 className="confirmation-next-steps-title">What's Next?</h4>
+                <ul className="confirmation-next-steps-list">
                   <li>• You'll receive a confirmation email shortly</li>
                   <li>• We'll send you updates via SMS as your order is prepared</li>
                   <li>• {orderType === 'delivery' 
@@ -815,16 +815,16 @@ const OrderOnlinePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto p-6 pt-24">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Order Online</h1>
-          <p className="text-gray-600">Fresh seafood delivered to your door or ready for pickup</p>
+    <div className="order-page">
+      <div className="order-container">
+        <div className="order-header">
+          <h1 className="order-title">Order Online</h1>
+          <p className="order-subtitle">Fresh seafood delivered to your door or ready for pickup</p>
         </div>
 
         {/* Progress Steps */}
-        <div className="flex justify-center mb-8">
-          <div className="flex items-center space-x-4">
+        <div className="progress-steps-container">
+          <div className="progress-steps">
             {[
               { step: 'menu', label: 'Menu' },
               { step: 'details', label: 'Details' },
@@ -840,24 +840,24 @@ const OrderOnlinePage = () => {
               ].includes(item.step) && currentStep !== item.step;
               
               return (
-                <div key={item.step} className="flex items-center">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                <div key={item.step} className="progress-step-container">
+                  <div className={`progress-step-circle ${
                     isActive 
-                      ? 'bg-red-700 text-white' 
+                      ? 'progress-step-active' 
                       : isCompleted 
-                        ? 'bg-green-600 text-white'
-                        : 'bg-gray-300 text-gray-600'
+                        ? 'progress-step-completed'
+                        : 'progress-step-inactive'
                   }`}>
                     {isCompleted ? '✓' : index + 1}
                   </div>
-                  <span className={`ml-2 text-sm font-medium ${
+                  <span className={`progress-step-label ${
                     isActive ? 'text-red-700' : isCompleted ? 'text-green-600' : 'text-gray-600'
                   }`}>
                     {item.label}
                   </span>
                   {index < 3 && (
-                    <div className={`w-8 h-0.5 mx-4 ${
-                      isCompleted ? 'bg-green-600' : 'bg-gray-300'
+                    <div className={`progress-line ${
+                      isCompleted ? 'progress-line-completed' : ''
                     }`} />
                   )}
                 </div>

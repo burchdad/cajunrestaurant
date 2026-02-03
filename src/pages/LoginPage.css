@@ -5,9 +5,15 @@
 }
 
 .login-container {
-  max-width: 28rem;
+  max-width: 72rem;
   margin: 0 auto;
   padding: 1.5rem;
+  padding-top: 6rem;
+}
+
+.login-form-wrapper {
+  max-width: 28rem;
+  margin: 0 auto;
 }
 
 .login-card {

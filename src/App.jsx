@@ -13,9 +13,9 @@ import LoginPage from "./pages/LoginPage";
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 flex flex-col">
+      <div className="app-container">
         <Header />
-        <main className="flex-1">
+        <main className="app-main">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/menu" element={<MenuPage />} />

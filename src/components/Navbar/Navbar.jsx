@@ -25,9 +25,9 @@ const Navbar = () => {
             <div className="navbar-section navbar-center">
               <Link to="/" className="logo-home-button" title="Return to Home">
                 <img 
-                  src="/photos/logo/4497175769342042725.png" 
+                  src="/photos/logo/main_logo.png" 
                   alt="Blue Anchor Seafood - Home" 
-                  className="h-6 w-auto navbar-logo"
+                  className="navbar-logo"
                 />
               </Link>
             </div>
@@ -38,7 +38,7 @@ const Navbar = () => {
               <Link to="/reservations" className={`navbar-link ${location.pathname === '/reservations' ? 'active' : ''}`}>Events</Link>
               <Link to="/contact" className={`navbar-link ${location.pathname === '/contact' ? 'active' : ''}`}>Contact</Link>
               <Link to="/order">
-                <Button size="sm" className="order-button ml-2">Order Now</Button>
+                <Button size="sm" className="order-button navbar-order-btn">Order Now</Button>
               </Link>
             </div>
 
@@ -48,16 +48,16 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
-              <div className={`hamburger-line ${isOpen ? 'rotate-45 translate-y-1.5' : ''}`}></div>
-              <div className={`hamburger-line ${isOpen ? 'opacity-0' : ''}`}></div>
-              <div className={`hamburger-line ${isOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></div>
+              <div className={`hamburger-line ${isOpen ? 'line-rotate-45' : ''}`}></div>
+              <div className={`hamburger-line ${isOpen ? 'line-hidden' : ''}`}></div>
+              <div className={`hamburger-line ${isOpen ? 'line-rotate-neg45' : ''}`}></div>
             </button>
           </div>
         </div>
       </nav>
 
       {/* Mobile Overlay Menu */}
-      <div className={`mobile-overlay-menu ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}>
+      <div className={`mobile-overlay-menu ${isOpen ? 'overlay-visible' : 'overlay-hidden'}`}>
         <div className="mobile-overlay-content">
           <div className="mobile-nav-container">
             {[ "/", "/menu", "/order", "/reservations", "/about", "/contact" ].map((path, i) => {
@@ -71,33 +71,33 @@ const Navbar = () => {
                   className="mobile-nav-item"
                   onClick={() => setIsOpen(false)}
                 >
-                  <div className="text-center">
-                    <div className="text-3xl mb-2 group-hover:animate-bounce">{icons[i]}</div>
-                    <div className="text-lg font-semibold text-white group-hover:text-cyan-200">{labels[i]}</div>
-                    <div className="text-sm text-gray-300 mt-1">{desc[i]}</div>
+                  <div className="nav-item-content">
+                    <div className="nav-item-icon">{icons[i]}</div>
+                    <div className="nav-item-title">{labels[i]}</div>
+                    <div className="nav-item-description">{desc[i]}</div>
                   </div>
                 </Link>
               );
             })}
 
-            <div className="border-t border-white/20 pt-6">
-              <div className="flex flex-col sm:flex-row gap-4">
+            <div className="mobile-nav-divider">
+              <div className="mobile-nav-buttons">
                 <Link to="/order" onClick={() => setIsOpen(false)}>
-                  <Button variant="gold" size="lg" className="w-full sm:w-auto text-lg font-semibold">
-                    🍽️ Order Now
+                  <Button variant="gold" size="lg" className="mobile-nav-button mobile-order-btn">
+                    Order Now
                   </Button>
                 </Link>
                 <Link to="/reservations" onClick={() => setIsOpen(false)}>
-                  <Button variant="glass" size="lg" className="w-full sm:w-auto text-lg font-semibold">
-                    🎉 Book Event
+                  <Button variant="glass" size="lg" className="mobile-nav-button mobile-event-btn">
+                    Book Event
                   </Button>
                 </Link>
               </div>
             </div>
 
-            <div className="border-t border-white/20 pt-6 text-center text-sm text-gray-300">
-              <p className="mb-2">📍 123 Harbor Drive, Seaside, FL</p>
-              <p>🕒 Open: Tue-Sun 11AM-9PM | No Reservations</p>
+            <div className="mobile-nav-footer">
+              <p className="footer-address">123 Harbor Drive, Seaside, FL</p>
+              <p className="footer-hours">Open: Tue-Sun 11AM-9PM | No Reservations</p>
             </div>
           </div>
         </div>
@@ -106,7 +106,7 @@ const Navbar = () => {
       {/* Backdrop */}
       {isOpen && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30 top-20"
+          className="mobile-backdrop"
           onClick={() => setIsOpen(false)}
         />
       )}

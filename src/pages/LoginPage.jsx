@@ -57,15 +57,15 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="max-w-6xl mx-auto p-6 pt-24">
-        <div className="max-w-md mx-auto">
-          <Card className="p-8">
-            <div className="text-center mb-6">
-              <h1 className="text-3xl font-bold mb-2">
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-form-wrapper">
+          <Card className="login-card">
+            <div className="login-header">
+              <h1 className="login-title">
                 {isLogin ? "Welcome Back" : "Create Account"}
               </h1>
-              <p className="text-gray-600">
+              <p className="login-subtitle">
                 {isLogin 
                   ? "Sign in to your Blue Anchor Seafood account" 
                   : "Join the Blue Anchor Seafood family"
@@ -73,12 +73,12 @@ const LoginPage = () => {
               </p>
             </div>
             
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="login-form">
               {!isLogin && (
                 <>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <div className="name-fields-grid">
+                    <div className="form-group">
+                      <label htmlFor="firstName" className="form-label">
                         First Name *
                       </label>
                       <input
@@ -88,12 +88,12 @@ const LoginPage = () => {
                         value={formData.firstName}
                         onChange={handleInputChange}
                         required={!isLogin}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                        className="form-input"
                       />
                     </div>
                     
-                    <div>
-                      <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                    <div className="form-group">
+                      <label htmlFor="lastName" className="form-label">
                         Last Name *
                       </label>
                       <input
@@ -103,13 +103,13 @@ const LoginPage = () => {
                         value={formData.lastName}
                         onChange={handleInputChange}
                         required={!isLogin}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                        className="form-input"
                       />
                     </div>
                   </div>
                   
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  <div className="form-group">
+                    <label htmlFor="phone" className="form-label">
                       Phone Number
                     </label>
                     <input
@@ -118,14 +118,14 @@ const LoginPage = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="form-input"
                     />
                   </div>
                 </>
               )}
               
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="form-group">
+                <label htmlFor="email" className="form-label">
                   Email Address *
                 </label>
                 <input
@@ -135,12 +135,12 @@ const LoginPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="form-input"
                 />
               </div>
               
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+              <div className="form-group">
+                <label htmlFor="password" className="form-label">
                   Password *
                 </label>
                 <input
@@ -151,16 +151,16 @@ const LoginPage = () => {
                   onChange={handleInputChange}
                   required
                   minLength={8}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="form-input"
                 />
                 {!isLogin && (
-                  <p className="text-xs text-gray-500 mt-1">Minimum 8 characters</p>
+                  <p className="password-hint">Minimum 8 characters</p>
                 )}
               </div>
               
               {!isLogin && (
-                <div>
-                  <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+                <div className="form-group">
+                  <label htmlFor="confirmPassword" className="form-label">
                     Confirm Password *
                   </label>
                   <input
@@ -171,31 +171,31 @@ const LoginPage = () => {
                     onChange={handleInputChange}
                     required={!isLogin}
                     minLength={8}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="form-input"
                   />
                 </div>
               )}
               
-              <Button type="submit" size="lg" className="w-full">
+              <Button type="submit" size="lg" className="submit-btn">
                 {isLogin ? "Sign In" : "Create Account"}
               </Button>
             </form>
             
             {isLogin && (
-              <div className="text-center mt-4">
-                <a href="#" className="text-sm text-red-600 hover:underline">
+              <div className="forgot-password-section">
+                <a href="#" className="forgot-password-link">
                   Forgot your password?
                 </a>
               </div>
             )}
             
-            <div className="text-center mt-6 pt-6 border-t">
-              <p className="text-sm text-gray-600">
+            <div className="toggle-mode-section">
+              <p className="toggle-text">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}
                 <button
                   type="button"
                   onClick={toggleMode}
-                  className="text-red-600 hover:underline ml-1 font-medium"
+                  className="toggle-button"
                 >
                   {isLogin ? "Sign Up" : "Sign In"}
                 </button>
@@ -204,27 +204,27 @@ const LoginPage = () => {
           </Card>
           
           {/* Benefits Card */}
-          <Card className="p-6 mt-6">
-            <h3 className="text-lg font-bold mb-4">Member Benefits</h3>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center">
-                <span className="text-red-600 mr-2">✓</span>
+          <Card className="benefits-card">
+            <h3 className="benefits-title">Member Benefits</h3>
+            <ul className="benefits-list">
+              <li className="benefit-item">
+                <span className="benefit-check">✓</span>
                 Exclusive access to online ordering
               </li>
-              <li className="flex items-center">
-                <span className="text-red-600 mr-2">✓</span>
+              <li className="benefit-item">
+                <span className="benefit-check">✓</span>
                 Priority reservations
               </li>
-              <li className="flex items-center">
-                <span className="text-red-600 mr-2">✓</span>
+              <li className="benefit-item">
+                <span className="benefit-check">✓</span>
                 Special member pricing and promotions
               </li>
-              <li className="flex items-center">
-                <span className="text-red-600 mr-2">✓</span>
+              <li className="benefit-item">
+                <span className="benefit-check">✓</span>
                 Birthday and anniversary rewards
               </li>
-              <li className="flex items-center">
-                <span className="text-red-600 mr-2">✓</span>
+              <li className="benefit-item">
+                <span className="benefit-check">✓</span>
                 Newsletter with seasonal menu updates
               </li>
             </ul>
