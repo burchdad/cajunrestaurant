@@ -4,88 +4,103 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="global-footer bg-gray-900 text-white py-12">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-4 gap-8">
-          {/* Restaurant Info */}
-          <div className="footer-section">
-            <Link to="/" className="flex items-center mb-4">
-              <img 
-                src="/blue-anchor-logo.svg" 
-                alt="Blue Anchor Seafood" 
-                className="h-12 w-auto hover:scale-105 transition-transform duration-300"
+    <footer className="global-footer">
+      {/* Newsletter Section with Map */}
+      <div className="newsletter-section relative">
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="grid">
+            {/* Newsletter Content */}
+            <div className="newsletter-content">
+              <h2 className="newsletter-title">Newsletter</h2>
+              <p className="newsletter-subtitle">Sign up for our newsletter & get exclusive offers and invites!</p>
+              <form className="newsletter-form">
+                <div className="form-group">
+                  <label htmlFor="email" className="form-label">Email (required)</label>
+                  <div className="form-input-group">
+                    <input 
+                      type="email" 
+                      id="email" 
+                      placeholder="e.g. email@example.com"
+                      className="newsletter-input"
+                      required
+                    />
+                    <button type="submit" className="newsletter-submit">SUBMIT</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            {/* Google Maps */}
+            <div className="newsletter-map">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3456.2345678901234!2d-90.0644!3d29.9511!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjnCsDU3JzA0LjAiTiA5MMKwMDMnNTEuOCJX!5e0!3m2!1sen!2sus!4v1234567890123"
+                width="100%"
+                height="300"
+                style={{ border: 0, borderRadius: '12px' }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Blue Anchor Seafood Location"
               />
-            </Link>
-            <p className="text-gray-300 text-sm leading-relaxed">
-              Serving the finest fresh seafood in the heart of New Orleans since 1991. 
-              Experience authentic Creole flavors and Gulf Coast hospitality.
-            </p>
-          </div>
-
-          {/* Quick Links */}
-          <div className="footer-section">
-            <h3 className="footer-title">Quick Links</h3>
-            <ul className="footer-links">
-              <li><Link to="/" className="footer-link">Home</Link></li>
-              <li><Link to="/menu" className="footer-link">Menu</Link></li>
-              <li><Link to="/about" className="footer-link">About Us</Link></li>
-              <li><Link to="/reservations" className="footer-link">Reservations</Link></li>
-              <li><Link to="/order" className="footer-link">Order Online</Link></li>
-              <li><Link to="/contact" className="footer-link">Contact</Link></li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div className="footer-section">
-            <h3 className="footer-title">Contact Us</h3>
-            <div className="footer-contact">
-              <p className="contact-item">
-                <span className="contact-label">Address:</span>
-                123 Bourbon Street<br />
-                New Orleans, LA 70116
-              </p>
-              <p className="contact-item">
-                <span className="contact-label">Phone:</span>
-                (504) 555-0123
-              </p>
-              <p className="contact-item">
-                <span className="contact-label">Email:</span>
-                info@blueanchorseafood.com
-              </p>
-            </div>
-          </div>
-
-          {/* Hours & Social */}
-          <div className="footer-section">
-            <h3 className="footer-title">Hours</h3>
-            <div className="footer-hours">
-              <p className="hours-item">Mon-Thu: 5:00 PM - 10:00 PM</p>
-              <p className="hours-item">Fri-Sat: 5:00 PM - 11:00 PM</p>
-              <p className="hours-item">Sunday: 4:00 PM - 9:00 PM</p>
-            </div>
-            
-            <div className="social-links mt-4">
-              <h4 className="text-sm font-semibold text-gray-300 mb-2">Follow Us</h4>
-              <div className="flex space-x-3">
-                <a href="#" className="social-link" aria-label="Facebook">
-                  <span className="social-icon">📘</span>
-                </a>
-                <a href="#" className="social-link" aria-label="Instagram">
-                  <span className="social-icon">📷</span>
-                </a>
-                <a href="#" className="social-link" aria-label="Twitter">
-                  <span className="social-icon">🐦</span>
-                </a>
-                <a href="#" className="social-link" aria-label="Yelp">
-                  <span className="social-icon">⭐</span>
-                </a>
-              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="footer-bottom">
+      {/* Main Footer Section */}
+      <div className="main-footer bg-blue-900 text-white py-12">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="main-footer-grid">
+            
+            {/* Location */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Location</h3>
+              <div className="footer-column-content">
+                <p>7900 Lakeshore Drive</p>
+                <p>New Orleans, LA</p>
+                <p>70124</p>
+              </div>
+            </div>
+
+            {/* Hours */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Hours</h3>
+              <div className="footer-column-content">
+                <p>Tuesday - Sunday</p>
+                <p>11:00 AM - 9:00 PM</p>
+                <p className="mt-4 font-semibold">No Reservations</p>
+              </div>
+            </div>
+
+            {/* Find Us On */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Find Us On...</h3>
+              <div className="footer-social-icons">
+                <a href="#" className="social-icon-link" aria-label="Facebook">
+                  <span className="social-icon">f</span>
+                </a>
+                <a href="#" className="social-icon-link" aria-label="Instagram">
+                  <span className="social-icon">📷</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Contact Us */}
+            <div className="footer-column">
+              <h3 className="footer-column-title">Contact Us</h3>
+              <div className="footer-column-content">
+                <p>(504)-284-2899</p>
+                <p>info@thebluecrabolna.com</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="footer-bottom bg-gray-900 text-gray-400 py-4">
+        <div className="max-w-6xl mx-auto px-6 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="copyright">
               © 2026 Blue Anchor Seafood. All rights reserved.

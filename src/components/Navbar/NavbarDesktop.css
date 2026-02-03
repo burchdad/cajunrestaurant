@@ -1,0 +1,61 @@
+/* Desktop Navbar Styles - 1024px and up */
+@media (min-width: 1024px) {
+  .navbar-content {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    height: 8rem;
+    position: relative;
+  }
+
+  .navbar-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-left {
+    justify-content: flex-start;
+    gap: 1.5rem;
+  }
+
+  .navbar-center {
+    justify-content: center;
+  }
+
+  .navbar-right {
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+
+  /* Hide mobile elements on desktop */
+  .mobile-menu-button {
+    display: none !important;
+  }
+
+  /* Hide mobile overlay menu on desktop */
+  .mobile-overlay-menu {
+    display: none !important;
+  }
+
+  /* Desktop-specific navigation link animations */
+  .navbar-link {
+    display: inline-block;
+  }
+
+  .navbar-link:hover {
+    color: #93c5fd;
+  }
+}
+
+/* Large desktop adjustments */
+@media (min-width: 1440px) {
+  .navbar-left,
+  .navbar-right {
+    gap: 2rem;
+  }
+  
+  .navbar-link {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+}

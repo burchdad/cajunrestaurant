@@ -1,0 +1,111 @@
+/* Shared Base Navbar Styles */
+.navbar-glass {
+  background: linear-gradient(180deg, rgba(15, 30, 60, 0.98) 0%, rgba(25, 45, 85, 0.97) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  color: white;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.navbar-glass .navbar-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 1.5rem !important;
+  width: 100% !important;
+}
+
+/* Logo Styles - Shared across all devices */
+.navbar-logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-home-button {
+  position: relative;
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.3s;
+}
+
+.logo-home-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.logo-home-button::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0.125rem;
+  background: linear-gradient(to right, #3b82f6, #93c5fd);
+  transition: all 0.3s;
+}
+
+.logo-home-button:hover::after {
+  width: 80%;
+}
+
+/* Shared Link Styles */
+.navbar-link {
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  transition: color 0.3s;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.navbar-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 0.125rem;
+  background: linear-gradient(to right, #3b82f6, #93c5fd);
+  transition: all 0.3s;
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+/* Active page styling */
+.navbar-link.active {
+  color: #93c5fd;
+}
+
+.navbar-link.active::after {
+  width: 100%;
+}
+
+/* Order Button - Shared across devices */
+.order-button {
+  background: linear-gradient(to top right, #ea580c, #fbbf24);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: all 0.3s;
+}
+
+.order-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}

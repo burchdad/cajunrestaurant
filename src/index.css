@@ -1,186 +1,179 @@
+/* Import Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ----------- Global Base Styles ----------- */
+:root {
+  --primary-blue: #1e40af;
+  --dark-blue: #1e3a8a;
+  --light-blue: #3b82f6;
+  --dark-grey: #374151;
+}
 
-/* -------------------------
-   Base / Global
--------------------------- */
-@layer base {
-  :root {
-    --primary-blue: #1e40af;
-    --dark-blue: #1e3a8a;
-    --light-blue: #3b82f6;
-    --dark-grey: #374151;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #f9fafb;
+  color: #111827;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#root {
+  width: 100%;
+}
+
+/* ----------- Utility Classes ----------- */
+.btn {
+  display: inline-block;
+  padding: 1.5rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-blue {
+  background-color: #2563eb;
+  color: white;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.btn-blue:hover {
+  background-color: #1d4ed8;
+}
+
+.btn-outline {
+  border: 1px solid #2563eb;
+  color: #2563eb;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.section {
+  padding: 4rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 4rem 2.5rem;
   }
+}
 
-  html {
-    scroll-behavior: smooth;
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #111827;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.25rem;
   }
+}
 
+.card {
+  background-color: white;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* ----------- Global Utilities ----------- */
+.animate-fadeUp {
+  animation: fadeUp 700ms ease-out both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bg-gradient-ocean {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 40%, #6b7280 100%);
+}
+
+.text-gradient-ocean {
+  background: linear-gradient(135deg, #1e40af, #374151);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Dark Mode */
+.dark body {
+  background: #1f2937;
+  color: #f9fafb;
+}
+
+.dark .card {
+  background: #374151;
+}
+
+/* Print handling */
+@media print {
+  .no-print {
+    display: none !important;
+  }
   body {
-    margin: 0;
-    font-family: "Inter", sans-serif;
-    background: #fff;
-    color: #f1f1f1;
-    line-height: 2.2;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Playfair Display", serif;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  ul, ol { 
-    list-style: none; 
-    padding: 0; 
-    margin: 0; 
-  }
-
-  #root { 
-    width: 100%; 
+    background: #fff !important;
+    color: #000 !important;
   }
 }
 
-/* -------------------------
-   Utilities (Animations + Effects)
--------------------------- */
-@layer utilities {
-  /* Animations */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes fadeScale {
-    from { opacity: 0; transform: scale(0.97); }
-    to   { opacity: 1; transform: scale(1); }
-  }
-
-  @keyframes floaty {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-8px); }
-  }
-
-  .animate-fadeUp { animation: fadeUp 700ms ease-out both; }
-  .animate-fadeScale { animation: fadeScale 650ms ease-out both; }
-  .animate-float { animation: floaty 3s ease-in-out infinite; }
-
-  /* Gradients */
-  .bg-gradient-ocean {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 40%, #6b7280 100%);
-  }
-
-  .text-gradient-gold {
-    background: linear-gradient(135deg, #3b82f6, #6b7280);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .text-gradient-ocean {
-    background: linear-gradient(135deg, #1e40af, #374151);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Razzoo-ish hero overlay utility */
-  .hero-overlay {
-    background: linear-gradient(
-      90deg,
-      rgba(0,0,0,0.72) 0%,
-      rgba(0,0,0,0.45) 45%,
-      rgba(0,0,0,0.15) 100%
-    );
-  }
-
-  /* Glass */
-  .glass {
-    backdrop-filter: blur(10px);
-    background: rgba(31, 31, 31, 0);
-    border: 1px solid rgba(255, 255, 255, 0.14);
-  }
-
-  /* Simple patterns (optional) */
-  .pattern-dots {
-    background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-
-  /* Better print */
-  @media print {
-    .no-print { display: none !important; }
-    body { background: #fff !important; color: #000 !important; }
-  }
-
-  /* Arc button positioning */
-  .arc-btn {
-    pointer-events: auto;
-    position: absolute;
-    padding: 8px 16px;
-    border-radius: 9999px;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    white-space: nowrap;
-    text-decoration: none;
-  }
-
-  /* Arch positions - positioned around the center with curved effect */
-  .arc-a { 
-    left: 5%; 
-    top: 80px;
-    transform: rotate(-15deg);
-  }
-  .arc-b { 
-    left: 20%; 
-    top: 30px;
-    transform: rotate(-7deg);
-  }
-  .arc-c { 
-    left: 50%; 
-    top: 10px;
-    transform: translateX(-50%) rotate(0deg);
-  }
-  .arc-d { 
-    right: 20%; 
-    top: 30px;
-    transform: rotate(7deg);
-  }
-  .arc-e { 
-    right: 5%; 
-    top: 80px;
-    transform: rotate(15deg);
-  }
-
-  /* Mobile fallback: no arc, just centered wrap */
-  @media (max-width: 640px) {
-    .arc-a, .arc-b, .arc-c, .arc-d, .arc-e {
-      position: static;
-      transform: none;
-      display: inline-block;
-      margin: 4px;
-      font-size: 0.75rem;
-      padding: 6px 12px;
-    }
-  }
+/* Subtle scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-/* -------------------------
-   Scrollbar (nice but subtle)
--------------------------- */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: #f3f4f6; }
-::-webkit-scrollbar-thumb { background: #1e40af; border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #1e3a8a; }
+::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e40af;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1e3a8a;
+}
